@@ -8,7 +8,7 @@ Escopo do Projeto: E-commerce para Loja de Carros
 2. Visão Geral do Sistema
 
     Descrição do Sistema: Plataforma online para listar, pesquisar e comprar carros. Inclui funcionalidades para gestão de inventário e processos de pagamento simulados.
-    Público-alvo do Sistema: Estudantes, professores e avaliadores.
+    Público-alvo do Sistema: Amantes de carros de luxo.
     Requisitos Funcionais e Não Funcionais:
         Funcionais: Gestão de usuários, catálogo de produtos, carrinho de compras, sistema de pagamento simulado, reviews e ratings.
         Não Funcionais: Desempenho (tempo de resposta), segurança (proteção de dados básicos), escalabilidade para fins acadêmicos, manutenibilidade.
@@ -29,7 +29,7 @@ Escopo do Projeto: E-commerce para Loja de Carros
         Catálogo de Carros: Listagem, detalhes, filtros (marca, modelo, preço).
         Carrinho de Compras: Adicionar/remover carros, visualizar carrinho.
         Processo de Pagamento: Simulação de pagamento, histórico de pedidos.
-        Avaliações e Comentários: Adicionar avaliações, visualizar comentários.
+    
     Casos de Uso Principais:
         Registro e Autenticação
         Pesquisa e Filtro de Carros
