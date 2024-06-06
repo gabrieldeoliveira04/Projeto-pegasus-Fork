@@ -1,26 +1,47 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { ApiProperty } from '@nestjs/swagger'; // Importe ApiProperty
+import { ApiProperty } from '@nestjs/swagger';
 
 export type CatalogDocument = Catalog & Document;
 
 @Schema()
 export class Catalog {
-  @ApiProperty() // Adicione anotações Swagger
+  @ApiProperty({ example: 'Mercedes-Benz' })
   @Prop({ required: true })
-  name: string;
+  marca: string;
 
-  @ApiProperty() // Adicione anotações Swagger
+  @ApiProperty({ example: 'AMG GT' })
+  @Prop({ required: true })
+  modelo: string;
+
+  @ApiProperty({ example: '4.0 V8 turbo gasolina' })
+  @Prop({ required: true })
+  motorizacao: string;
+
+  @ApiProperty({ example: null })
   @Prop()
-  description: string;
+  carroceria: string;
 
-  // Adicione outras propriedades conforme necessário
+  @ApiProperty({ example: 'R 7G DCT' })
+  @Prop({ required: true })
+  transmissao: string;
+
+  @ApiProperty({ example: 'R$ 2.150.000' })
+  @Prop({ required: true })
+  preco: string;
+
+  @ApiProperty({ example: 2020 })
+  @Prop({ required: true })
+  ano: number;
+
+  @ApiProperty({ example: null })
+  @Prop()
+  versao: string;
 }
 
-// Crie o esquema do Mongoose com as configurações personalizadas
 export const CatalogSchema = SchemaFactory.createForClass(Catalog).set('toJSON', {
   transform: function (doc, ret) {
-    delete ret.__v; // Remova o campo '__v' do objeto retornado
+    delete ret.__v;
     return ret;
   }
 });
