@@ -1,0 +1,85 @@
+{
+    "carros": [
+      {
+        "marca": "Mercedes-Benz",
+        "modelo": "AMG GT",
+        "motorizacao": "4.0 V8 turbo gasolina",
+        "carroceria": null,
+        "transmissao": "R 7G DCT",
+        "preco": "R$ 2.150.000",
+        "ano": 2020,
+        "versao": null
+      },
+      {
+        "marca": "Aston Martin",
+        "modelo": "BDS",
+        "motorizacao": "5.7 V12 turbo gasolina",
+        "carroceria": "coupe",
+        "transmissao": "automático",
+        "preco": "R$ 4.200.000",
+        "ano": 2022,
+        "versao": null
+      },
+      {
+        "marca": "Ferrari",
+        "modelo": "812 GTS",
+        "motorizacao": "6.5 V12 gasolina",
+        "carroceria": null,
+        "transmissao": "F1-DCT",
+        "preco": "R$ 7.700.000",
+        "ano": "2023/2024",
+        "versao": null
+      },
+      {
+        "marca": "Ferrari",
+        "modelo": "458 Spidey",
+        "motorizacao": "3.9 V8 turbo gasolina",
+        "carroceria": null,
+        "transmissao": "F1-DCT",
+        "preco": "R$ 3.200.000",
+        "ano": 2018,
+        "versao": null
+      },
+      {
+        "marca": "Lamborghini",
+        "modelo": "Aventador",
+        "motorizacao": "6.5 V12 gasolina",
+        "carroceria": null,
+        "transmissao": null,
+        "preco": "R$ 9.500.000",
+        "ano": 2021,
+        "versao": "LP 770-4 SVJ ISR"
+      },
+      {
+        "marca": "Porsche",
+        "modelo": "Taycan",
+        "motorizacao": "4 Cross Turismo elétrico",
+        "carroceria": null,
+        "transmissao": null,
+        "preco": "R$ 690.000",
+        "ano": 2022,
+        "versao": null
+      },
+      {
+        "marca": "Porsche",
+        "modelo": "911",
+        "motorizacao": "3.8 24V H6 gasolina turbo",
+        "carroceria": "cabriolet",
+        "transmissao": "PDK",
+        "preco": "R$ 1.790.000",
+        "ano": "2023/2024",
+        "versao": null
+      },
+      {
+        "marca": "Lamborghini",
+        "modelo": "Urus",
+        "motorizacao": "4.0 V8 turbo gasolina",
+        "carroceria": null,
+        "transmissao": "automático",
+        "preco": "R$ 3.200.000",
+        "ano": 2022,
+        "versao": "LP650-4"
+      }
+    ]
+  }
+  
