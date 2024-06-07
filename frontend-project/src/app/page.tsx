@@ -55,22 +55,23 @@ export default function Home() {
         />
       </div>
 
-      <Container></Container>
-      <section className="bg-slate-200 w-full mx-auto p-4">
-        {isLoading ? (
-          <p className="text-white">Carregando dados...</p>
-        ) : error ? (
-          <p className="text-red-500">{error}</p>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {catalogData.map((carro) => (
-              <div key={carro._id}>
-                <CarrosCard data={carro} />
-              </div>
-            ))}
-          </div>
-        )}
-      </section>
+      <Container>
+        <section className="bg-slate-200 w-full mx-auto p-4">
+          {isLoading ? (
+            <p className="text-white">Carregando dados...</p>
+          ) : error ? (
+            <p className="text-red-500">{error}</p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {catalogData.map((carro) => (
+                <div key={carro._id}>
+                  <CarrosCard data={carro} />
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      </Container>
     </main>
   );
 }
