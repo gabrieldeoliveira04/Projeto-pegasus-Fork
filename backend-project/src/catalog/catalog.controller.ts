@@ -10,11 +10,11 @@ export class CatalogController {
   constructor(private readonly catalogService: CatalogService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Create a new catalog item' }) // Descreve a operação na documentação Swagger
-  @ApiResponse({ status: 201, description: 'The catalog item has been successfully created.' })
+  @ApiOperation({ summary: 'Create new catalog items' }) // Descreve a operação na documentação Swagger
+  @ApiResponse({ status: 201, description: 'The catalog items have been successfully created.' })
   @ApiBadRequestResponse({ description: 'Bad request: Invalid data provided.' })
-  create(@Body() createCatalogDto: CreateCatalogDto) {
-    return this.catalogService.create(createCatalogDto);
+  create(@Body() createCatalogDtos: CreateCatalogDto[]) {
+    return this.catalogService.create(createCatalogDtos);
   }
 
   @Get()
@@ -37,7 +37,7 @@ export class CatalogController {
   @ApiResponse({ status: 200, description: 'Returns the updated catalog item.' })
   @ApiNotFoundResponse({ description: 'Catalog item not found.' })
   @ApiBadRequestResponse({ description: 'Bad request: Invalid data provided.' })
-  update(@Param('id') id: string, @Body() updateCatalogDto: CreateCatalogDto) {
+  update(@Param('id') id: string, @Body() updateCatalogDto: UpdateCatalogDto) {
     return this.catalogService.update(id, updateCatalogDto);
   }
 

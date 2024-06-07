@@ -9,9 +9,14 @@ import { UpdateCatalogDto } from './dto/update.catalog.dto';
 export class CatalogService {
   constructor(@InjectModel(Catalog.name) private catalogModel: Model<CatalogDocument>) {}
 
-  async create(createCatalogDto: CreateCatalogDto): Promise<Catalog> {
-    const createdCatalog = new this.catalogModel(createCatalogDto);
-    return createdCatalog.save();
+  async create(createCatalogDtos: CreateCatalogDto[]): Promise<Catalog[]> {
+    const createdCatalogs = await Promise.all(
+      createCatalogDtos.map(createCatalogDto => {
+        const createdCatalog = new this.catalogModel(createCatalogDto);
+        return createdCatalog.save();
+      })
+    );
+    return createdCatalogs;
   }
 
   async findAll(): Promise<Catalog[]> {
