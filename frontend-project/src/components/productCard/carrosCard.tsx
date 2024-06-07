@@ -16,17 +16,15 @@ interface CarrosCardProps {
 }
 
 const CarrosCard: React.FC<CarrosCardProps> = ({ carro }) => {
-  return (
-    <div className="carro-card p-4 mb-4 bg-white rounded shadow-md">
-      <h2 className="text-xl font-bold mb-2">{carro.marca} {carro.modelo}</h2>
-      <p><strong>Motorização:</strong> {carro.motorizacao}</p>
-      {carro.carroceria && <p><strong>Carroceria:</strong> {carro.carroceria}</p>}
-      <p><strong>Transmissão:</strong> {carro.transmissao || "Não especificado"}</p>
-      <p><strong>Preço:</strong> {carro.preco}</p>
-      <p><strong>Ano:</strong> {carro.ano}</p>
-      {carro.versao && <p><strong>Versão:</strong> {carro.versao}</p>}
-    </div>
-  );
-};
+    return (
+        <div className="border p-4 rounded-md bg-white shadow-md">
+          <h2 className="text-xl font-bold">{carro.marca} {carro.modelo}</h2>
+          <p>Motorização: {carro.motorizacao}</p>
+          <p>Transmissão: {carro.transmissao}</p>
+          <p>Preço: {carro.preco}</p>
+          <p>Ano: {carro.ano}</p>
+        </div>
+      );
+    };
 
 export default CarrosCard;

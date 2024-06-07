@@ -1,104 +1,46 @@
 'use client'
+
+import { Container } from "@/components/container";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import fundoImg from "../../public/fundo one.jpg";
 import CarrosCard from "../components/productCard/carrosCard";
+import { CarProps } from "../utils/types/cars"
 
-interface Carro {
-  _id: string;
-  marca: string;
-  modelo: string;
-  motorizacao: string;
-  carroceria: string | null;
-  transmissao: string | null;
-  preco: string;
-  ano: string | number;
-  versao: string | null;
+async function getCatalog(){
+  try {
+    const res = await fetch(`${process.env.NEXT_API_URL}/catalog`, { next: { revalidate: 320}});
+    return res.json();
+  } catch (err) {
+    throw new Error("Erro ao carregar os dados do catálogo")
+  }
 }
 
 export default function Home() {
   const [catalogData, setCatalogData] = useState<Carro[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Simula um atraso de 1 segundo para carregar os dados mockados
-    const timer = setTimeout(() => {
-      setCatalogData(mockData);
-      setIsLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
+    fetch('http://127.0.0.1:3001/catalog')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erro ao carregar os dados do catálogo');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Dados recebidos:', data);
+        setCatalogData(data);
+        setIsLoading(false);
+      })
+      .catch(error => {
+        console.error('Erro ao buscar os dados do catálogo', error);
+        setError('Erro ao carregar os dados do catálogo. Tente novamente mais tarde.');
+        setIsLoading(false);
+      });
   }, []);
-
-  // Dados mockados
-  const mockData: Carro[] = [
-    {
-      _id: "1",
-      marca: "Mercedes-Benz",
-      modelo: "AMG GT",
-      motorizacao: "4.0 V8 turbo gasolina",
-      carroceria: null,
-      transmissao: "R 7G DCT",
-      preco: "R$ 2.150.000",
-      ano: 2020,
-      versao: null
-    },
-    {
-      _id: "2",
-      marca: "Mercedes-Benz",
-      modelo: "AMG GT",
-      motorizacao: "4.0 V8 turbo gasolina",
-      carroceria: null,
-      transmissao: "R 7G DCT",
-      preco: "R$ 2.150.000",
-      ano: 2020,
-      versao: null
-    },
-    {
-      _id: "3",
-      marca: "Mercedes-Benz",
-      modelo: "AMG GT",
-      motorizacao: "4.0 V8 turbo gasolina",
-      carroceria: null,
-      transmissao: "R 7G DCT",
-      preco: "R$ 2.150.000",
-      ano: 2020,
-      versao: null
-    },
-    {
-      _id: "4",
-      marca: "Mercedes-Benz",
-      modelo: "AMG GT",
-      motorizacao: "4.0 V8 turbo gasolina",
-      carroceria: null,
-      transmissao: "R 7G DCT",
-      preco: "R$ 2.150.000",
-      ano: 2020,
-      versao: null
-    },
-    {
-      _id: "5",
-      marca: "Mercedes-Benz",
-      modelo: "AMG GT",
-      motorizacao: "4.0 V8 turbo gasolina",
-      carroceria: null,
-      transmissao: "R 7G DCT",
-      preco: "R$ 2.150.000",
-      ano: 2020,
-      versao: null
-    },
-    {
-      _id: "6",
-      marca: "Mercedes-Benz",
-      modelo: "AMG GT",
-      motorizacao: "4.0 V8 turbo gasolina",
-      carroceria: null,
-      transmissao: "R 7G DCT",
-      preco: "R$ 2.150.000",
-      ano: 2020,
-      versao: null
-    }
-  ];
 
   return (
     <main className="flex flex-col items-center">
@@ -115,8 +57,10 @@ export default function Home() {
       <section className="bg-slate-600 w-full max-w-2xl mx-auto p-4">
         {isLoading ? (
           <p className="text-white">Carregando dados...</p>
+        ) : error ? (
+          <p className="text-red-500">{error}</p>
         ) : (
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {catalogData.map((carro) => (
               <div key={carro._id}>
                 <CarrosCard carro={carro} />
