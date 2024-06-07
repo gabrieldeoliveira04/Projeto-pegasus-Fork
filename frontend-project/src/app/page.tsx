@@ -54,7 +54,9 @@ export default function Home() {
           sizes="100vw"
         />
       </div>
-      <section className="bg-slate-600 w-full max-w-2xl mx-auto p-4">
+
+      <Container></Container>
+      <section className="bg-slate-200 w-full mx-auto p-4">
         {isLoading ? (
           <p className="text-white">Carregando dados...</p>
         ) : error ? (
@@ -63,7 +65,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {catalogData.map((carro) => (
               <div key={carro._id}>
-                <CarrosCard carro={carro} />
+                <CarrosCard data={carro} />
               </div>
             ))}
           </div>
