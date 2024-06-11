@@ -56,7 +56,7 @@ export default function Home() {
       </div>
 
       <Container>
-        <section className="bg-slate-200 w-full mx-auto p-4">
+        <section className="w-full mx-auto p-4">
           {isLoading ? (
             <p className="text-white">Carregando dados...</p>
           ) : error ? (
