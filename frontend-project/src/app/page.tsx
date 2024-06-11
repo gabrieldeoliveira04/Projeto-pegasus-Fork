@@ -1,24 +1,13 @@
 'use client'
-
 import { Container } from "@/components/container";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import fundoImg from "../../public/fundo one.jpg";
 import CarrosCard from "../components/productCard/carrosCard";
 import { CarProps } from "../utils/types/cars"
 
-async function getCatalog(){
-  try {
-    const res = await fetch(`${process.env.NEXT_API_URL}/catalog`, { next: { revalidate: 320}});
-    return res.json();
-  } catch (err) {
-    throw new Error("Erro ao carregar os dados do catálogo")
-  }
-}
-
 export default function Home() {
-  const [catalogData, setCatalogData] = useState<Carro[]>([]);
+  const [catalogData, setCatalogData] = useState<CarProps[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
