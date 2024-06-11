@@ -33,7 +33,7 @@ export function Header(){
                     </div>
 
                     <div className='ml-16'> 
-                        <Link href='/profile' className='flex items-center'>
+                        <Link href='/shopping-cart' className='flex items-center'>
                             <RiShoppingBagLine size={30} color='white'/>
                             <span className="hidden sm:flex ml-2">Carrinho</span>
                         </Link>
