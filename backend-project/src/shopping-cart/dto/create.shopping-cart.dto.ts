@@ -1,10 +1,10 @@
-import { ApiProperty } from '@nestjs/swagger'; // Importe ApiProperty
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateShoppingCartDto {
-  @ApiProperty() // Adicione anotações Swagger
+  @ApiProperty()
   userId: string;
 
-  @ApiProperty() // Adicione anotações Swagger
+  @ApiProperty()
   items: {
     productId: string;
     quantity: number;
