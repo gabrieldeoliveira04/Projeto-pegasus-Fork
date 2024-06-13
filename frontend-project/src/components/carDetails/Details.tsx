@@ -62,10 +62,12 @@ const CatalogItem: React.FC<CatalogItemProps> = ({ data }) => {
         <div className="mb-auto mt-4 sm:mt-0">
           <h2 className="text-2xl font-bold mb-2">{data.marca} {data.modelo}</h2>
           <p className="text-lg text-green-600 font-semibold mb-4">Preço: {data.preco}</p>
-          <div className=" text-base text-gray-600 mb-8">
+          <div className="text-base text-gray-600 mb-8">
             <p>Motorização: {data.motorizacao}</p>
             <p>Transmissão: {data.transmissao}</p>
             <p>Ano: {data.ano}</p>
+            <h3 className=' mt-10'>Descrição:</h3>
+            <p style={{ marginTop: '5px', marginBottom: '10px', fontStyle: 'italic', lineHeight: '1.6', fontSize: '18px' }}>{data.descricao}</p>
           </div>
         </div>
         <div className="flex items-center mt-auto"> {/* Container flexível para os botões */}

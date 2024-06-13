@@ -8,4 +8,5 @@ export interface CarProps {
   preco: number;
   ano: number;
   versao: string | null;
+  descricao: string;
 }
