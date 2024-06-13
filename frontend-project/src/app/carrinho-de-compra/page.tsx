@@ -11,7 +11,7 @@ export default function Cart() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('http://localhost:3001/shopping-cart')
+    fetch('http://localhost:3001/carrinho-de-compra')
       .then(response => {
         if (!response.ok) {
           throw new Error('Erro ao carregar os dados do carrinho');
