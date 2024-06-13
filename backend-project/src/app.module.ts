@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CatalogService } from './catalog/services/catalog.service';
 import { CatalogModule } from './catalog/catalog.module';
-import { ShoppingCartService } from './shopping-cart/shopping-cart.service';
+import { ShoppingCartService } from './shopping-cart/services/shopping-cart.service';
 import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 import { TransactionService } from './transaction/transaction.service';
 import { TransactionModule } from './transaction/transaction.module';
