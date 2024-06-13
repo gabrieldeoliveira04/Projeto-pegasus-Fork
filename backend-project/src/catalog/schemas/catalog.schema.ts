@@ -6,37 +6,41 @@ export type CatalogDocument = Catalog & Document;
 
 @Schema()
 export class Catalog {
-  @ApiProperty({ example: 'Mercedes-Benz' })
+  @ApiProperty({ example: 'Aston-Martin' })
   @Prop({ required: true })
   marca: string;
 
-  @ApiProperty({ example: 'AMG GT' })
+  @ApiProperty({ example: 'BDS' })
   @Prop({ required: true })
   modelo: string;
 
-  @ApiProperty({ example: '4.0 V8 turbo gasolina' })
+  @ApiProperty({ example: '5.7 V12 turbo gasolina' })
   @Prop({ required: true })
   motorizacao: string;
 
-  @ApiProperty({ example: null })
+  @ApiProperty({ example: 'Coupe', nullable: true })
   @Prop()
-  carroceria: string;
+  carroceria?: string;
 
-  @ApiProperty({ example: 'R 7G DCT' })
-  @Prop({ required: true })
-  transmissao: string;
+  @ApiProperty({ example: 'Automático', nullable: true })
+  @Prop()
+  transmissao?: string;
 
-  @ApiProperty({ example: 'R$ 2.150.000' })
+  @ApiProperty({ example: 'R$ 4.200.000' })
   @Prop({ required: true })
   preco: string;
 
-  @ApiProperty({ example: 2020 })
+  @ApiProperty({ example: 2022 })
   @Prop({ required: true })
   ano: number;
 
-  @ApiProperty({ example: null })
+  @ApiProperty({ example: 'Luxury', nullable: true })
   @Prop()
-  versao: string;
+  versao?: string;
+
+  @ApiProperty({ example: 'Descrição do veículo', nullable: true })
+  @Prop()
+  descricao: string;
 }
 
 export const CatalogSchema = SchemaFactory.createForClass(Catalog).set('toJSON', {
