@@ -7,8 +7,6 @@ import { CatalogService } from '../services/catalog.service';
 import { CatalogGuard } from '../catalog.guard';
 
 @Controller('catalog')
-@ApiBearerAuth() // Especifica que a autenticação é necessária para todas as rotas do controlador
-//@UseGuards(CatalogGuard) // Usa o guarda de usuário em todas as rotas do controlador
 @ApiTags('Catalog')
 export class CatalogController {
   constructor(private readonly catalogService: CatalogService) {}
@@ -17,6 +15,8 @@ export class CatalogController {
   @ApiOperation({ summary: 'Create new catalog item(s)' })
   @ApiBody({ type: CreateCatalogDto }) // Aceita um único CreateCatalogDto
   @ApiBody({ type: [CreateCatalogDto] }) // Aceita um array de CreateCatalogDto
+  @ApiBearerAuth()
+  @UseGuards(CatalogGuard)
   @ApiResponse({ status: 201, description: 'The catalog item(s) have been successfully created.', type: Catalog, isArray: true })
   @ApiBadRequestResponse({ description: 'Bad request: Invalid data provided.' })
   async create(@Body() createDto: CreateCatalogDto | CreateCatalogDto[]): Promise<Catalog | Catalog[]> {
@@ -40,6 +40,8 @@ export class CatalogController {
 
   @Get()
   @ApiOperation({ summary: 'Get all catalog items' })
+  @ApiBearerAuth()
+  @UseGuards(CatalogGuard) 
   @ApiResponse({ status: 200, description: 'Returns all catalog items.', type: Catalog, isArray: true })
   async findAll(): Promise<Catalog[]> {
     return this.catalogService.findAll();
@@ -47,6 +49,8 @@ export class CatalogController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Get a catalog item by ID' })
+  @ApiBearerAuth()
+  @UseGuards(CatalogGuard)
   @ApiResponse({ status: 200, description: 'Returns the catalog item with the specified ID.', type: Catalog })
   @ApiNotFoundResponse({ description: 'Catalog item not found.' })
   async findOne(@Param('id') id: string): Promise<Catalog> {
@@ -56,6 +60,8 @@ export class CatalogController {
   @Patch(':id')
   @ApiOperation({ summary: 'Update a catalog item by ID' })
   @ApiResponse({ status: 200, description: 'Returns the updated catalog item.', type: Catalog })
+  @ApiBearerAuth()
+  @UseGuards(CatalogGuard)
   @ApiNotFoundResponse({ description: 'Catalog item not found.' })
   @ApiBadRequestResponse({ description: 'Bad request: Invalid data provided.' })
   async update(@Param('id') id: string, @Body() updateCatalogDto: UpdateCatalogDto): Promise<Catalog> {
@@ -74,6 +80,8 @@ export class CatalogController {
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete a catalog item by ID' })
+  @ApiBearerAuth()
+  @UseGuards(CatalogGuard)
   @ApiResponse({ status: 200, description: 'Catalog item has been successfully deleted.' })
   @ApiNotFoundResponse({ description: 'Catalog item not found.' })
   async remove(@Param('id') id: string): Promise<void> {
