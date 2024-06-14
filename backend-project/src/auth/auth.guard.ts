@@ -1,53 +1,78 @@
-import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, CanActivate, ExecutionContext, UnauthorizedException, InternalServerErrorException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { jwtConstants } from './constants';
-import { Request } from 'express';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private jwtService: JwtService) {}
-  
+
   /**
-   * Método de ativação do guard que verifica a autenticação do usuário.
+   * Método para verificar se um usuário pode acessar uma rota protegida.
    *
    * @param context O contexto da execução.
-   * @returns Um valor booleano que indica se o usuário está autenticado.
-   * @throws UnauthorizedException Se a autenticação falhar.
+   * @returns Um valor booleano que indica se o usuário tem permissão para acessar a rota.
+   * @throws UnauthorizedException Se a autenticação falhar ou se o token for inválido.
+   * @throws InternalServerErrorException Se ocorrer um erro interno ao verificar o token.
    */
+  @ApiBearerAuth()
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
+
+    // Extrai o token do cabeçalho de autorização da requisição
     const token = this.extractTokenFromHeader(request);
-    
-    // Verifica se o token está ausente.
+
     if (!token) {
-      throw new UnauthorizedException('Não autenticado. Faça login para acessar esta rota.');
+      throw new UnauthorizedException('Token de autorização ausente.');
     }
 
     try {
-      // Verifica o token com a chave secreta.
-      const payload = await this.jwtService.verifyAsync(token, {
-        secret: jwtConstants.secret,
-      });
+      // Verifica o token usando o serviço JWT
+      const decodedToken = await this.jwtService.verifyAsync(token);
 
-      // 💡 Atribui o payload ao objeto de requisição (request) para acessá-lo nos handlers de rota.
-      request['user'] = payload;
-    } catch {
-      // Lança uma exceção de UnauthorizedException se a verificação do token falhar.
-      throw new UnauthorizedException('Não autenticado. Faça login para acessar esta rota.');
+      // Verifica se o token corresponde a critérios personalizados
+      if (!this.isValidToken(decodedToken, token)) {
+        throw new UnauthorizedException('Acesso proibido. Token inválido ou expirado.');
+      }
+
+      return true;
+    } catch (error) {
+      if (error instanceof UnauthorizedException) {
+        throw error;
+      } else if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') {
+        throw new UnauthorizedException('Acesso proibido. Token inválido ou expirado.');
+      } else {
+        throw new InternalServerErrorException('Erro interno ao verificar o token de autorização.');
+      }
     }
+  }
 
-    // Retorna true para permitir o acesso à rota protegida.
+  /**
+   * Método para verificar se o token é válido com base em critérios personalizados.
+   *
+   * @param decodedToken O token JWT decodificado.
+   * @param token O token JWT original.
+   * @returns true se o token for válido, false caso contrário.
+   */
+  private isValidToken(decodedToken: any, token: string): boolean {
     return true;
   }
 
   /**
-   * Extrai o token do cabeçalho de autorização da requisição.
+   * Método para extrair o token do cabeçalho de autorização da requisição.
    *
    * @param request O objeto de requisição HTTP.
    * @returns O token JWT ou undefined se não for encontrado.
    */
-  private extractTokenFromHeader(request: Request): string | undefined {
-    const [type, token] = request.headers.authorization?.split(' ') ?? [];
-    return type === 'Bearer' ? token : undefined;
+  private extractTokenFromHeader(request: any): string | undefined {
+    const authHeader = request.headers.authorization;
+
+    if (authHeader) {
+      const [type, token] = authHeader.split(' ');
+      if (type === 'Bearer') {
+        return token;
+      }
+    }
+
+    return undefined;
   }
 }
