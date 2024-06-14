@@ -1,25 +1,45 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import * as mongoose from 'mongoose';
 
-@Schema({ timestamps: true }) // Ative os timestamps se necessário
-export class User {
-  @Prop()
-  name: string;
+export const UserSchema = new mongoose.Schema(
+  {
+    username: String,
+    email: String,
+    password: {
+      type: String,
+      select: true, // Não oculta o campo nas consultas por padrão
+    },
 
-  @Prop()
-  email: string;
+    /**
+     * Data de criação do usuário.
+     */
+    create_at: {
+      type: Date,
+      default: Date.now,
+      select: false, // Oculta o campo nas consultas por padrão
+    },
 
-  @Prop()
-  password: string;
-}
-
-export type UserDocument = User & Document;
-
-// Crie o esquema do Mongoose com as configurações personalizadas
-export const UserSchema = SchemaFactory.createForClass(User).set('toJSON', {
-  transform: function (doc, ret) {
-    // Exclua o campo '__v' do objeto retornado
-    delete ret.__v;
-    return ret;
+    /**
+     * Data de atualização do usuário.
+     */
+    update_at: {
+      type: Date,
+      select: false, // Oculta o campo nas consultas por padrão
+      default: null, // Define o valor padrão como nulo, pois ainda não foi atualizado
+    },
+  },
+  {
+    /**
+     * Transforma a resposta JSON do documento.
+     */
+    toJSON: {
+      transform: function (doc, ret) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+        delete ret.password;
+        delete ret.create_at;
+        delete ret.update_at;
+      },
+    },
   }
-});
+);
