@@ -1,11 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, HttpException } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBadRequestResponse, ApiNotFoundResponse, ApiBody } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, HttpException, UseGuards } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiBadRequestResponse, ApiNotFoundResponse, ApiBody, ApiBearerAuth } from '@nestjs/swagger';
 import { Catalog } from '../schemas/catalog.schema';
 import { CreateCatalogDto } from '../dtos/create.catalog.dto';
 import { UpdateCatalogDto } from '../dtos/update.catalog.dto';
 import { CatalogService } from '../services/catalog.service';
+import { CatalogGuard } from '../catalog.guard';
 
 @Controller('catalog')
+@ApiBearerAuth() // Especifica que a autenticação é necessária para todas as rotas do controlador
+//@UseGuards(CatalogGuard) // Usa o guarda de usuário em todas as rotas do controlador
 @ApiTags('Catalog')
 export class CatalogController {
   constructor(private readonly catalogService: CatalogService) {}
