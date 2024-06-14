@@ -47,8 +47,6 @@ export class CatalogController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Get a catalog item by ID' })
-  @ApiBearerAuth()
-  @UseGuards(CatalogGuard)
   @ApiResponse({ status: 200, description: 'Returns the catalog item with the specified ID.', type: Catalog })
   @ApiNotFoundResponse({ description: 'Catalog item not found.' })
   async findOne(@Param('id') id: string): Promise<Catalog> {
