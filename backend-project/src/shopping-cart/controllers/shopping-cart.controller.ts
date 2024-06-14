@@ -1,12 +1,15 @@
 // shopping-cart.controller.ts
-import { Controller, Get, Post, Patch, Delete, Param, Body } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBadRequestResponse, ApiNotFoundResponse } from '@nestjs/swagger';
+import { Controller, Get, Post, Patch, Delete, Param, Body, UseGuards } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiBadRequestResponse, ApiNotFoundResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 import { CreateShoppingCartDto } from '../dto/create.shopping-cart.dto';
 import { UpdateShoppingCartDto } from '../dto/update.shopping-cart.dto';
 import { ShoppingCart } from '../schemas/shopping-cart.schema';
+import { ShoppingCartGuard } from '../shopping-cart.guard';
 
 @Controller('shopping-cart')
+@ApiBearerAuth() // Especifica que a autenticação é necessária para todas as rotas do controlador
+@UseGuards(ShoppingCartGuard) // Usa o guarda de usuário em todas as rotas do controlador
 @ApiTags('Shopping Cart')
 export class ShoppingCartController {
   constructor(private readonly shoppingCartService: ShoppingCartService) {}
