@@ -1,42 +1,35 @@
-// catalog.service.ts
+import { ManageCatalogUseCase } from './../use-cases/manage-catalog.usecase';
 import { Injectable } from '@nestjs/common';
-import { CatalogRepository } from '../repositories/catalog.repository';
 import { CreateCatalogDto } from '../dtos/create.catalog.dto';
 import { UpdateCatalogDto } from '../dtos/update.catalog.dto';
 import { Catalog } from '../schemas/catalog.schema';
-import { CreateCatalogUseCase } from '../use-cases/create-catalog.usecase';
-import { GetAllCatalogsUseCase } from '../use-cases/get-all-catalogs.usecase';
-import { GetCatalogByIdUseCase } from '../use-cases/get-catalog-by-id.usecase';
-import { UpdateCatalogUseCase } from '../use-cases/update-catalog.usecase';
-import { DeleteCatalogUseCase } from '../use-cases/delete-catalog.usecase';
+import { FindCatalogUseCase } from '../use-cases/find-catalog.usercase';
+
 
 @Injectable()
 export class CatalogService {
   constructor(
-    private readonly createCatalogUseCase: CreateCatalogUseCase,
-    private readonly getAllCatalogsUseCase: GetAllCatalogsUseCase,
-    private readonly getCatalogByIdUseCase: GetCatalogByIdUseCase,
-    private readonly updateCatalogUseCase: UpdateCatalogUseCase,
-    private readonly deleteCatalogUseCase: DeleteCatalogUseCase,
+    private readonly findCatalogUseCase: FindCatalogUseCase,
+    private readonly manageCatalogUseCase: ManageCatalogUseCase
   ) {}
 
   async create(createCatalogDto: CreateCatalogDto): Promise<Catalog> {
-    return this.createCatalogUseCase.execute(createCatalogDto);
+    return this.manageCatalogUseCase.create(createCatalogDto);
   }
 
   async findAll(): Promise<Catalog[]> {
-    return this.getAllCatalogsUseCase.execute();
+    return this.findCatalogUseCase.findAll();
   }
 
   async findOne(id: string): Promise<Catalog> {
-    return this.getCatalogByIdUseCase.execute(id);
+    return this.findCatalogUseCase.findOne(id);
   }
 
   async update(id: string, updateCatalogDto: UpdateCatalogDto): Promise<Catalog> {
-    return this.updateCatalogUseCase.execute(id, updateCatalogDto);
+    return this.manageCatalogUseCase.update(id, updateCatalogDto);
   }
 
-  async remove(id: string): Promise<void> {
-    return this.deleteCatalogUseCase.execute(id);
+  async delete(id: string): Promise<void> {
+    return this.manageCatalogUseCase.delete(id);
   }
 }
