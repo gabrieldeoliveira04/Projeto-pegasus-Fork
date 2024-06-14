@@ -4,11 +4,8 @@ import { CatalogController } from './controllers/catalog.controller';
 import { CatalogService } from './services/catalog.service';
 import { Catalog, CatalogSchema } from './schemas/catalog.schema';
 import { CatalogRepository } from './repositories/catalog.repository';
-import { CreateCatalogUseCase } from './use-cases/create-catalog.usecase';
-import { GetAllCatalogsUseCase } from './use-cases/get-all-catalogs.usecase';
-import { GetCatalogByIdUseCase } from './use-cases/get-catalog-by-id.usecase';
-import { UpdateCatalogUseCase } from './use-cases/update-catalog.usecase';
-import { DeleteCatalogUseCase } from './use-cases/delete-catalog.usecase';
+import { FindCatalogUseCase } from './use-cases/find-catalog.usercase';
+import { ManageCatalogUseCase } from './use-cases/manage-catalog.usecase';
 
 @Module({
   imports: [
@@ -18,20 +15,14 @@ import { DeleteCatalogUseCase } from './use-cases/delete-catalog.usecase';
   providers: [
     CatalogRepository,
     CatalogService,
-    CreateCatalogUseCase,
-    GetAllCatalogsUseCase,
-    GetCatalogByIdUseCase,
-    UpdateCatalogUseCase,
-    DeleteCatalogUseCase
+    FindCatalogUseCase,
+    ManageCatalogUseCase,
   ],
   exports: [
     CatalogRepository,
     CatalogService,
-    CreateCatalogUseCase,
-    GetAllCatalogsUseCase,
-    GetCatalogByIdUseCase,
-    UpdateCatalogUseCase,
-    DeleteCatalogUseCase,
+    FindCatalogUseCase,
+    ManageCatalogUseCase,
     MongooseModule.forFeature([{ name: Catalog.name, schema: CatalogSchema }])
   ],
 })
