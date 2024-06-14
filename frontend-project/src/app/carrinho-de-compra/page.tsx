@@ -1,17 +1,27 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Header } from '@/components/header';
-import { CarProps } from '@/utils/types/cars';
+import ItemCarrinho from '@/components/cardsPedidos/pedidos';
+
+interface CarroItem {
+  _id: string;
+  marca: string;
+  modelo: string;
+  preco: string;
+}
+
+interface CartItem {
+  productId: string;
+  quantity: number;
+  catalogData: CarroItem;
+}
 
 export default function Cart() {
-  const [cartItems, setCartItems] = useState<CarProps[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]); // Definindo o tipo de cartItems
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('http://localhost:3001/carrinho-de-compra')
+    fetch('http://localhost:3001/shopping-cart')
       .then(response => {
         if (!response.ok) {
           throw new Error('Erro ao carregar os dados do carrinho');
@@ -19,7 +29,12 @@ export default function Cart() {
         return response.json();
       })
       .then(data => {
-        setCartItems(data);
+        const items = data[0]?.items.map((item: any) => ({ // Ajustando o tipo para 'any' temporariamente
+          productId: item.productId,
+          quantity: item.quantity,
+          catalogData: item.catalogData
+        }));
+        setCartItems(items);
         setIsLoading(false);
       })
       .catch(error => {
@@ -28,6 +43,23 @@ export default function Cart() {
         setIsLoading(false);
       });
   }, []);
+
+  // Função para calcular o preço total do carrinho
+  const calcularPrecoTotal = (): string => {
+    let total = 0;
+    cartItems.forEach(item => {
+      const precoLimpo = item.catalogData.preco
+        .replace('R$', '')
+        .replace('.', '')
+        .replace('.', '')
+        .trim();
+      const precoItem = parseFloat(precoLimpo);
+
+      total += precoItem * item.quantity;
+    });
+
+    return total.toLocaleString('pt-BR', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+  };
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -43,31 +75,28 @@ export default function Cart() {
               <p className="text-lg">Seu carrinho está vazio.</p>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Utilizando o novo componente ItemCarrinho para cada item no carrinho */}
                 {cartItems.map((item) => (
-                  <div key={item._id} className="bg-white rounded-lg shadow-md">
-                    <div className="relative h-48">
-                      <Image
-                        src={`/carImages/${item.marca}_${item.modelo}.webp`}
-                        alt={`${item.marca} ${item.modelo}`}
-                        layout="fill"
-                        objectFit="cover"
-                        className="rounded-t-lg"
-                      />
-                    </div>
-                    <div className="p-4">
-                      <h2 className="text-xl font-bold mb-2">{item.marca} {item.modelo}</h2>
-                      <p>Motorização: {item.motorizacao}</p>
-                      <p>Transmissão: {item.transmissao}</p>
-                      <p>Preço: {item.preco}</p>
-                      <p>Ano: {item.ano}</p>
-                      <div className="mt-4">
-                        <a href={`/catalog/${item._id}`} className="text-blue-500">Ver detalhes</a>
-                      </div>
-                    </div>
-                  </div>
+                  <ItemCarrinho key={item.catalogData._id} item={item} />
                 ))}
               </div>
             )}
+
+            {/* Div fixa no canto direito para mostrar o preço total */}
+            <div className="relative top-0 right-0 bg-white p-4 shadow-md flex justify-between items-center">
+              {/* Div para o preço total à esquerda */}
+              <div>
+                <p className="font-bold text-xl mb-2">Preço Total do Pedido:</p>
+                <p className="text-lg">R$ {calcularPrecoTotal()}</p>
+              </div>
+
+              {/* Botão para opções de pagamento à direita */}
+              <div className="mt-4">
+                <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+                  Opções de Pagamento
+                </button>
+              </div>
+            </div>
           </>
         )}
       </main>
