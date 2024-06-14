@@ -1,11 +1,9 @@
-import { CatalogDocument } from './../../catalog/schemas/catalog.schema';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ShoppingCart, ShoppingCartDocument } from './../schemas/shopping-cart.schema';
 import { CreateShoppingCartDto } from '../dto/create.shopping-cart.dto';
 import { UpdateShoppingCartDto } from '../dto/update.shopping-cart.dto';
-import { Catalog } from './../../catalog/schemas/catalog.schema';
 import { CatalogService } from 'src/catalog/services/catalog.service';
 
 @Injectable()
@@ -23,14 +21,13 @@ export class ShoppingCartRepository {
   async findAll(): Promise<any[]> {
     const shoppingCarts = await this.shoppingCartModel.find().exec();
 
-    // Fetch corresponding catalog data for each productId in items array
     const result = await Promise.all(shoppingCarts.map(async (cart) => {
       const itemsWithCatalogData = await Promise.all(cart.items.map(async (item) => {
         const catalogData = await this.catalogService.findOne(item.productId);
         return {
           productId: item.productId,
           quantity: item.quantity,
-          catalogData: catalogData ? catalogData.toJSON() : null, // Include catalog data if found
+          catalogData: catalogData ? catalogData.toJSON() : null,
         };
       }));
 
