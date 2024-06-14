@@ -40,8 +40,6 @@ export class CatalogController {
 
   @Get()
   @ApiOperation({ summary: 'Get all catalog items' })
-  @ApiBearerAuth()
-  @UseGuards(CatalogGuard) 
   @ApiResponse({ status: 200, description: 'Returns all catalog items.', type: Catalog, isArray: true })
   async findAll(): Promise<Catalog[]> {
     return this.catalogService.findAll();
