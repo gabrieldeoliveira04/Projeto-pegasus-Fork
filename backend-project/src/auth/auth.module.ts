@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AuthService } from './shared/auth.service';
+import { AuthService } from './services/auth.service';
 import { UsersModule } from 'src/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
-import { AuthController } from './auth.controller';
+import { AuthController } from './controllers/auth.controller';
 import { jwtConstants } from './constants';
+import { AuthRepository } from './repositories/auth.repository';
+import { SignInUseCase } from './use-cases/sing-in.usecase';
+import { ValidatePasswordUseCase } from './use-cases/validate-password.usecase';
 
 @Module({
   imports: [
@@ -14,8 +17,18 @@ import { jwtConstants } from './constants';
       signOptions: { expiresIn: '3600s' },
     }),
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    AuthRepository,
+    SignInUseCase,
+    ValidatePasswordUseCase
+  ],
   controllers: [AuthController],
-  exports: [AuthService],
+  exports: [   
+    AuthService,
+    AuthRepository,
+    SignInUseCase,
+    ValidatePasswordUseCase
+  ],
 })
 export class AuthModule {}
