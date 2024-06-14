@@ -1,45 +1,39 @@
-import * as mongoose from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
+import { ApiProperty } from '@nestjs/swagger';
 
-export const UserSchema = new mongoose.Schema(
-  {
-    username: String,
-    email: String,
-    password: {
-      type: String,
-      select: true, // Não oculta o campo nas consultas por padrão
-    },
+export type UserDocument = User & Document;
 
-    /**
-     * Data de criação do usuário.
-     */
-    create_at: {
-      type: Date,
-      default: Date.now,
-      select: false, // Oculta o campo nas consultas por padrão
-    },
+@Schema()
+export class User {
+  @ApiProperty({ example: 'username' })
+  @Prop({ required: true })
+  username: string;
 
-    /**
-     * Data de atualização do usuário.
-     */
-    update_at: {
-      type: Date,
-      select: false, // Oculta o campo nas consultas por padrão
-      default: null, // Define o valor padrão como nulo, pois ainda não foi atualizado
-    },
+  @ApiProperty({ example: 'user@example.com' })
+  @Prop({ required: true })
+  email: string;
+
+  @ApiProperty({ example: 'password' })
+  @Prop({ required: true, select: false })
+  password: string;
+
+  @ApiProperty({ example: '2023-06-14T19:47:10.918Z' })
+  @Prop({ default: Date.now })
+  create_at: Date;
+
+  @ApiProperty({ example: '2023-06-14T19:47:10.918Z', nullable: true })
+  @Prop({ default: null })
+  update_at: Date;
+}
+
+export const UserSchema = SchemaFactory.createForClass(User).set('toJSON', {
+  transform: function (doc, ret) {
+    ret.id = ret._id;
+    delete ret._id;
+    delete ret.__v;
+    delete ret.password;
+    delete ret.create_at;
+    delete ret.update_at;
   },
-  {
-    /**
-     * Transforma a resposta JSON do documento.
-     */
-    toJSON: {
-      transform: function (doc, ret) {
-        ret.id = ret._id;
-        delete ret._id;
-        delete ret.__v;
-        delete ret.password;
-        delete ret.create_at;
-        delete ret.update_at;
-      },
-    },
-  }
-);
+});
