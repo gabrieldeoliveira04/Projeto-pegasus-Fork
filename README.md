@@ -121,7 +121,7 @@ Escopo do Projeto: E-commerce para Loja de Carros
     Atualizações de Segurança e Software: Monitoramento contínuo, atualizações regulares de dependências.
 
 
-# Modelo de Projeto Web Mobile com Next.js
+# Projeto Fronte-end Ecommerce PEGASUS com Next.js
 
 ## O que está incluso:
 
