@@ -136,21 +136,19 @@ Para instalar basta rodar na raiz do projeto:
 ```bash
 npm install
 npm run dev
-
-Arquitetura
+```
+## Arquitetura
 Dependências Core
 São as principais dependências do projeto, que precisam ser compreendidas pelo menos minimamente para entender como esta arquitetura funciona.
 
 Next.js: Framework React para desenvolvimento web com renderização do lado do servidor (SSR) e geração de sites estáticos (SSG).
 Tailwind CSS: Framework utilitário CSS para criar layouts modernos rapidamente.
 next-icons: Pacote de ícones para uso no Next.js.
-Stores
-As stores são responsáveis por armazenar o estado da aplicação. Qualquer tipo de informação que possa ser utilizada em mais de uma página ou componente deve ser armazenada em uma store. Elas também são responsáveis por fazer requests externas através de serviços que lidam com requisições externas e tratamento de erros. Nenhuma store deve tratar erros; isso é responsabilidade do serviço e da página que iniciou a requisição.
 
-Páginas
+## Páginas
 As páginas possuem rotas próprias. São sempre divididas entre container e componente. O container (index.js) faz a conexão com as stores e é responsável por toda a lógica da página e por passar as informações da store para a interface. Já o componente (nome da página) é responsável pela interface visual.
 
-Estrutura das Páginas:
+## Estrutura das Páginas:
 Home: Página inicial do site, exibindo uma lista de produtos.
 catalogo/[id]: Página de detalhes de um produto específico.
 login: Página de login do usuário.
@@ -161,7 +159,7 @@ novo-usuario: Página para registrar um novo usuário.
 Componentes
 Todos os componentes visuais são declarados nesta pasta. Botões, checkboxes, inputs, etc. Também são declarados componentes responsáveis por "behavior", mesmo sem ter uma interface, como o caso do FormContainer, que encapsula comportamentos de formulário vindos do Formik para todos os filhos que forem passados como props.
 
-Componentes:
+## Componentes:
 Header: Cabeçalho do site, inclui navegação.
 SideBar: Barra lateral para navegação adicional.
 Container: Componente de centralização de conteúdo.
@@ -172,20 +170,23 @@ CardsPedidos: Componente que exibe no carrinho de compras todos os pedidos.
 Utils/Modules
 Para facilitar uma possível migração de dependências, todas as dependências são declaradas no arquivo de módulos e depois importadas apontando para este arquivo.
 
-Gerador de Páginas e Componentes
+## Gerador de Páginas e Componentes
 Para facilitar a criação de novas páginas e componentes, temos um gerador que cria a estrutura de pasta e arquivos necessários.
 
-Para gerar uma Página:
+## Para gerar uma Página:
 
-bash
+```bash
 Copiar código
 npm run generate:page
-Para gerar um Componente:
+```
 
-bash
+## Para gerar um Componente:
+
+```bash
 Copiar código
 npm run generate:component
-Commits
+```
+## Commits
 Os commits devem seguir o seguinte padrão: <type>(scope): <description>
 
 Sendo que os types podem ser os seguintes:
