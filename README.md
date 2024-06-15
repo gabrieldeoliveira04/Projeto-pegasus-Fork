@@ -119,3 +119,77 @@ Escopo do Projeto: E-commerce para Loja de Carros
     Planos de Suporte Pós-implementação: Suporte limitado para correções durante o período do projeto.
     Processo de Correção de Bugs e Implementação de Melhorias: Sistema de tickets para bugs, atualizações regulares.
     Atualizações de Segurança e Software: Monitoramento contínuo, atualizações regulares de dependências.
+
+
+# Modelo de Projeto Web Mobile com Next.js
+
+## O que está incluso:
+
+- Next.js
+- Tailwind CSS
+- next-icons
+
+## Install & Start
+
+Para instalar basta rodar na raiz do projeto:
+
+```bash
+npm install
+npm run dev
+
+Arquitetura
+Dependências Core
+São as principais dependências do projeto, que precisam ser compreendidas pelo menos minimamente para entender como esta arquitetura funciona.
+
+Next.js: Framework React para desenvolvimento web com renderização do lado do servidor (SSR) e geração de sites estáticos (SSG).
+Tailwind CSS: Framework utilitário CSS para criar layouts modernos rapidamente.
+next-icons: Pacote de ícones para uso no Next.js.
+Stores
+As stores são responsáveis por armazenar o estado da aplicação. Qualquer tipo de informação que possa ser utilizada em mais de uma página ou componente deve ser armazenada em uma store. Elas também são responsáveis por fazer requests externas através de serviços que lidam com requisições externas e tratamento de erros. Nenhuma store deve tratar erros; isso é responsabilidade do serviço e da página que iniciou a requisição.
+
+Páginas
+As páginas possuem rotas próprias. São sempre divididas entre container e componente. O container (index.js) faz a conexão com as stores e é responsável por toda a lógica da página e por passar as informações da store para a interface. Já o componente (nome da página) é responsável pela interface visual.
+
+Estrutura das Páginas:
+Home: Página inicial do site, exibindo uma lista de produtos.
+catalogo/[id]: Página de detalhes de um produto específico.
+login: Página de login do usuário.
+carrinho-de-compra: Página de visualização do carrinho de compras.
+favoritos: Página que exibe os produtos favoritos do usuário.
+novo-produto: Página para adicionar um novo produto.
+novo-usuario: Página para registrar um novo usuário.
+Componentes
+Todos os componentes visuais são declarados nesta pasta. Botões, checkboxes, inputs, etc. Também são declarados componentes responsáveis por "behavior", mesmo sem ter uma interface, como o caso do FormContainer, que encapsula comportamentos de formulário vindos do Formik para todos os filhos que forem passados como props.
+
+Componentes:
+Header: Cabeçalho do site, inclui navegação.
+SideBar: Barra lateral para navegação adicional.
+Container: Componente de centralização de conteúdo.
+Input: Componente de input, para futura implementação de pesquisa de item.
+ProductCard: Componente que exibe os cards de cada produto na página inicial.
+CarDetails: Componente que, ao clicar no card, mostra mais informações sobre o item, incluindo a opção de compra.
+CardsPedidos: Componente que exibe no carrinho de compras todos os pedidos.
+Utils/Modules
+Para facilitar uma possível migração de dependências, todas as dependências são declaradas no arquivo de módulos e depois importadas apontando para este arquivo.
+
+Gerador de Páginas e Componentes
+Para facilitar a criação de novas páginas e componentes, temos um gerador que cria a estrutura de pasta e arquivos necessários.
+
+Para gerar uma Página:
+
+bash
+Copiar código
+npm run generate:page
+Para gerar um Componente:
+
+bash
+Copiar código
+npm run generate:component
+Commits
+Os commits devem seguir o seguinte padrão: <type>(scope): <description>
+
+Sendo que os types podem ser os seguintes:
+
+feat: Uma nova feature.
+fix: Correção de um bug.
+chore: Uma alteração que não é nem uma nova feature, nem uma correção.
