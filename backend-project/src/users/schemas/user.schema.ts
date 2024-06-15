@@ -15,7 +15,7 @@ export class User {
   email: string;
 
   @ApiProperty({ example: 'password' })
-  @Prop({ required: true, select: false })
+  @Prop({ required: true })
   password: string;
 
   @ApiProperty({ example: '2023-06-14T19:47:10.918Z' })
@@ -32,7 +32,9 @@ export const UserSchema = SchemaFactory.createForClass(User).set('toJSON', {
     ret.id = ret._id;
     delete ret._id;
     delete ret.__v;
-    delete ret.password;
+    if (!ret.password) {
+      delete ret.password;
+    }
     delete ret.create_at;
     delete ret.update_at;
   },
