@@ -54,7 +54,7 @@ Escopo do Projeto: E-commerce para Loja de Carros
     Linguagens de Programação: TypeScript.
     Frameworks e Ferramentas:
         Backend: Node.js, NestJS.
-        Frontend: Angular.
+        Frontend: Next.js.
     Banco de Dados: MongoDB.
     Ferramentas de Desenvolvimento: Visual Studio Code, Git.
 
