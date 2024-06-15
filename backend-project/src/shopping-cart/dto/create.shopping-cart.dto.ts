@@ -9,10 +9,6 @@ export class CreateShoppingCartDto {
     {
       productId: '666b3bf0bff0b1cc6fdea87d',
       quantity: 1
-    },
-    {
-      productId: '666b3bf0bff0b1cc6fdea87e',
-      quantity: 2
     }
   ] })
   items: ShoppingCartItemDto[];
