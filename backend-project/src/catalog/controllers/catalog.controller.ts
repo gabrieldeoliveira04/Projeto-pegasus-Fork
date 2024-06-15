@@ -11,11 +11,6 @@ import { AuthGuard } from 'src/auth/auth.guard';
 export class CatalogController {
   constructor(private readonly catalogService: CatalogService) {}
 
-  /**
-   * Endpoint POST para criar novos itens de catálogo.
-   * @param createDto Os dados para criação de um ou mais itens de catálogo.
-   * @returns Um único item de catálogo criado ou uma matriz de itens de catálogo criados.
-   */
   @Post()
   @ApiOperation({ summary: 'Create new catalog item(s)' })
   @ApiBody({ type: CreateCatalogDto, isArray: true })
@@ -41,10 +36,6 @@ export class CatalogController {
     }
   }
 
-  /**
-   * Endpoint GET para obter todos os itens de catálogo.
-   * @returns Uma matriz de todos os itens de catálogo existentes.
-   */
   @Get()
   @ApiOperation({ summary: 'Get all catalog items' })
   @ApiResponse({ status: 200, description: 'Returns all catalog items.', type: Catalog, isArray: true })
@@ -57,11 +48,6 @@ export class CatalogController {
     }
   }
 
-  /**
-   * Endpoint GET para obter um item de catálogo pelo ID.
-   * @param id O ID do item de catálogo a ser recuperado.
-   * @returns O item de catálogo correspondente ao ID fornecido.
-   */
   @Get(':id')
   @ApiOperation({ summary: 'Get a catalog item by ID' })
   @ApiResponse({ status: 200, description: 'Returns the catalog item with the specified ID.', type: Catalog })
@@ -77,18 +63,11 @@ export class CatalogController {
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw error;
-      } else {
-        throw new InternalServerErrorException('Internal server error while fetching catalog item');
       }
+      throw new InternalServerErrorException('Internal server error while fetching catalog item');
     }
   }
 
-  /**
-   * Endpoint PATCH para atualizar um item de catálogo pelo ID.
-   * @param id O ID do item de catálogo a ser atualizado.
-   * @param updateCatalogDto Os dados para atualização do item de catálogo.
-   * @returns O item de catálogo atualizado.
-   */
   @Patch(':id')
   @ApiOperation({ summary: 'Update a catalog item by ID' })
   @ApiResponse({ status: 200, description: 'Returns the updated catalog item.', type: Catalog })
@@ -109,10 +88,6 @@ export class CatalogController {
     }
   }
 
-  /**
-   * Endpoint DELETE para excluir um item de catálogo pelo ID.
-   * @param id O ID do item de catálogo a ser excluído.
-   */
   @Delete(':id')
   @ApiOperation({ summary: 'Delete a catalog item by ID' })
   @ApiBearerAuth()
@@ -124,9 +99,6 @@ export class CatalogController {
     try {
       await this.catalogService.delete(id);
     } catch (error) {
-      if (error.name === 'ValidationError') {
-        throw new HttpException({ message: 'Validation failed', errors: error.errors }, HttpStatus.BAD_REQUEST);
-      }
       throw new HttpException('Internal server error while removing catalog item', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }

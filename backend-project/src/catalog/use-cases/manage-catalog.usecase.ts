@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { Catalog } from '../schemas/catalog.schema';
 import { CreateCatalogDto } from '../dtos/create.catalog.dto';
 import { UpdateCatalogDto } from '../dtos/update.catalog.dto';
@@ -9,21 +9,39 @@ export class ManageCatalogUseCase {
   constructor(private readonly catalogRepository: CatalogRepository) {}
 
   async create(createCatalogDto: CreateCatalogDto): Promise<Catalog> {
-    return this.catalogRepository.create(createCatalogDto);
+    try {
+      return await this.catalogRepository.create(createCatalogDto);
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to create catalog item');
+    }
   }
 
   async update(id: string, updateCatalogDto: UpdateCatalogDto): Promise<Catalog> {
-    const updatedCatalog = await this.catalogRepository.update(id, updateCatalogDto);
-    if (!updatedCatalog) {
-      throw new NotFoundException('Catalog item not found.');
+    try {
+      const updatedCatalog = await this.catalogRepository.update(id, updateCatalogDto);
+      if (!updatedCatalog) {
+        throw new NotFoundException('Catalog item not found');
+      }
+      return updatedCatalog;
+    } catch (error) {
+      if (error.name === 'CastError') {
+        throw new NotFoundException('Catalog item not found');
+      }
+      throw new InternalServerErrorException('Failed to update catalog item');
     }
-    return updatedCatalog;
   }
 
   async delete(id: string): Promise<void> {
-    const result = await this.catalogRepository.delete(id);
-    if (result === 0) {
-      throw new NotFoundException('Catalog item not found.');
+    try {
+      const result = await this.catalogRepository.delete(id);
+      if (result === 0) {
+        throw new NotFoundException('Catalog item not found');
+      }
+    } catch (error) {
+      if (error.name === 'CastError') {
+        throw new NotFoundException('Catalog item not found');
+      }
+      throw new InternalServerErrorException('Failed to delete catalog item');
     }
   }
 }

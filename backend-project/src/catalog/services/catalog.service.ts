@@ -1,10 +1,9 @@
-import { ManageCatalogUseCase } from './../use-cases/manage-catalog.usecase';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { CreateCatalogDto } from '../dtos/create.catalog.dto';
 import { UpdateCatalogDto } from '../dtos/update.catalog.dto';
 import { Catalog } from '../schemas/catalog.schema';
 import { FindCatalogUseCase } from '../use-cases/find-catalog.usercase';
-
+import { ManageCatalogUseCase } from '../use-cases/manage-catalog.usecase';
 
 @Injectable()
 export class CatalogService {
@@ -14,22 +13,59 @@ export class CatalogService {
   ) {}
 
   async create(createCatalogDto: CreateCatalogDto): Promise<Catalog> {
-    return this.manageCatalogUseCase.create(createCatalogDto);
+    try {
+      return await this.manageCatalogUseCase.create(createCatalogDto);
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to create catalog item');
+    }
   }
 
   async findAll(): Promise<Catalog[]> {
-    return this.findCatalogUseCase.findAll();
+    try {
+      return await this.findCatalogUseCase.findAll();
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to fetch catalog items');
+    }
   }
 
   async findOne(id: string): Promise<Catalog> {
-    return this.findCatalogUseCase.findOne(id);
+    try {
+      const catalogItem = await this.findCatalogUseCase.findOne(id);
+      if (!catalogItem) {
+        throw new NotFoundException('Catalog item not found');
+      }
+      return catalogItem;
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      throw new InternalServerErrorException('Failed to fetch catalog item');
+    }
   }
 
   async update(id: string, updateCatalogDto: UpdateCatalogDto): Promise<Catalog> {
-    return this.manageCatalogUseCase.update(id, updateCatalogDto);
+    try {
+      const updatedCatalog = await this.manageCatalogUseCase.update(id, updateCatalogDto);
+      if (!updatedCatalog) {
+        throw new NotFoundException('Catalog item not found');
+      }
+      return updatedCatalog;
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      throw new InternalServerErrorException('Failed to update catalog item');
+    }
   }
 
   async delete(id: string): Promise<void> {
-    return this.manageCatalogUseCase.delete(id);
+    try {
+      await this.manageCatalogUseCase.delete(id);
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      throw new InternalServerErrorException('Failed to delete catalog item');
+    }
   }
 }

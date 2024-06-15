@@ -31,7 +31,7 @@ export class SignInUseCase {
       };
     } catch (error) {
       if (error instanceof UnauthorizedException) {
-        throw error; // Re-throwing UnauthorizedException with original message
+        throw error;
       } else {
         throw new InternalServerErrorException('Erro interno durante o processo de login');
       }
