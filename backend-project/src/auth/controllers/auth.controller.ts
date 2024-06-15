@@ -9,9 +9,9 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   /**
-   * Rota para autenticar um usuário.
-   * @param signInDto Os dados de autenticação do usuário.
-   * @returns Um token JWT se a autenticação for bem-sucedida.
+   * Route to authenticate a user.
+   * @param signInDto User authentication data.
+   * @returns JWT token if authentication is successful.
    */
   @Post('login')
   @HttpCode(HttpStatus.OK)
@@ -30,9 +30,9 @@ export class AuthController {
       return { token };
     } catch (error) {
       if (error instanceof UnauthorizedException) {
-        throw new UnauthorizedException('User not found or incorrect password');
+        throw new UnauthorizedException('User not found or incorrect password', error.getResponse());
       } else {
-        throw new InternalServerErrorException('Internal server error during user authentication');
+        throw new InternalServerErrorException('Internal server error during user authentication', error.getResponse());
       }
     }
   }
