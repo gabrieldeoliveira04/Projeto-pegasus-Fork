@@ -184,14 +184,12 @@ Para facilitar a criação de novas páginas e componentes, temos um gerador que
 ## Para gerar uma Página:
 
 ```bash
-Copiar código
 npm run generate:page
 ```
 
 ## Para gerar um Componente:
 
 ```bash
-Copiar código
 npm run generate:component
 ```
 ## Commits
