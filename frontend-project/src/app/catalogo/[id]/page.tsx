@@ -18,17 +18,7 @@ export default function Home() {
     if (idFromPath) {
       const fetchCarData = async () => {
         try {
-          const token = localStorage.getItem('jwtToken'); // Obtém o token JWT do localStorage
-          if (!token) {
-            throw new Error('Token JWT não encontrado.');
-          }
-
-          console.log('Authorization Header:', `Bearer ${token}`); // Log para verificar o cabeçalho de Authorization
-
           const response = await fetch(`http://127.0.0.1:3001/catalog/${idFromPath}`, {
-            headers: {
-              Authorization: `Bearer ${token}`, // Envia o token JWT no cabeçalho Authorization
-            },
           });
 
           if (!response.ok) {
