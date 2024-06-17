@@ -7,10 +7,10 @@ Escopo do Projeto: E-commerce para Loja de Carros
 
 2. Visão Geral do Sistema
 
-    Descrição do Sistema: Plataforma online para listar, pesquisar e comprar carros. Inclui funcionalidades para gestão de inventário e processos de pagamento simulados.
+    Descrição do Sistema: Plataforma online para listar, pesquisar e adicionar carros ao seu carrinho de compras. Inclui funcionalidades para gestão de compra e processos de catalogação.
     Público-alvo do Sistema: Amantes de carros de luxo.
     Requisitos Funcionais e Não Funcionais:
-        Funcionais: Gestão de usuários, catálogo de produtos, carrinho de compras, sistema de pagamento simulado, reviews e ratings.
+        Funcionais: Gestão de usuários, catálogo de produtos, carrinho de compras, sistema de pagamento simulado.
         Não Funcionais: Desempenho (tempo de resposta), segurança (proteção de dados básicos), escalabilidade para fins acadêmicos, manutenibilidade.
 
 3. Arquitetura de Sistema
@@ -28,20 +28,16 @@ Escopo do Projeto: E-commerce para Loja de Carros
         Gestão de Usuários: Registro, login, perfil.
         Catálogo de Carros: Listagem, detalhes, filtros (marca, modelo, preço).
         Carrinho de Compras: Adicionar/remover carros, visualizar carrinho.
-        Processo de Pagamento: Simulação de pagamento, histórico de pedidos.
     
     Casos de Uso Principais:
         Registro e Autenticação
         Pesquisa e Filtro de Carros
         Gestão do Carrinho de Compras
-        Processamento de Pagamento Simulado
-        Submissão de Avaliações
     Fluxo de Trabalhos do Usuário:
         Navegação anônima ou autenticada
         Busca de carros
         Adição de carros ao carrinho
         Finalização da compra
-        Avaliação e feedback
 
 5. Requisitos Não Funcionais
 
@@ -65,7 +61,7 @@ Escopo do Projeto: E-commerce para Loja de Carros
         Usuário (informações pessoais)
         Carro (detalhes do veículo, preço, estoque)
         Pedido (itens, status, histórico)
-    Esquema de Armazenamento: Coleções para usuários, carros, pedidos, avaliações.
+    Esquema de Armazenamento: Coleções para usuários, carros, pedidos.
 
 8. Interfaces do Usuário
 
@@ -74,9 +70,8 @@ Escopo do Projeto: E-commerce para Loja de Carros
         Home: Busca e listagem de carros.
         Detalhes do Carro: Informações detalhadas, avaliações.
         Carrinho: Listagem de itens no carrinho, resumo de preço.
-        Checkout: Processo de pagamento simulado, confirmação de pedido.
         Perfil do Usuário: Dados pessoais, histórico de pedidos.
-    Fluxos de Interação do Usuário: Navegação entre telas, confirmação de ações (ex: adição ao carrinho, pagamento).
+    Fluxos de Interação do Usuário: Navegação entre telas, confirmação de ações (ex: adição ao carrinho, login).
 
 9. Arquitetura de Implementação
 
@@ -85,7 +80,7 @@ Escopo do Projeto: E-commerce para Loja de Carros
         Frontend: Componentes Angular divididos por funcionalidades.
     Divisão em Módulos e Componentes:
         Módulos no NestJS para gerenciamento de usuários, carros, pedidos.
-        Componentes Angular para interfaces de usuário.
+        Componentes Next/React para interfaces de usuário.
     Dependências entre os Componentes: Uso de injeção de dependência para gerenciar relações entre serviços.
 
 10. Planejamento de Implantação
@@ -105,8 +100,8 @@ Escopo do Projeto: E-commerce para Loja de Carros
 12. Gestão de Projetos
 
     Cronograma de Desenvolvimento: Divisão do projeto em sprints, entregas incrementais.
-    Atribuição de Tarefas e Responsabilidades: Equipe de desenvolvimento com papéis definidos (desenvolvedores, QA).
-    Monitoramento do Progresso: Uso de ferramentas de gestão de projetos (ex: Jira, Trello).
+    Atribuição de Tarefas e Responsabilidades: Equipe de desenvolvimento com papéis definidos (desenvolvedores back-front).
+    Monitoramento do Progresso: Uso de ferramentas de gestão de projetos (Git).
 
 13. Considerações de Segurança
 
