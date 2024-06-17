@@ -195,3 +195,164 @@ Sendo que os types podem ser os seguintes:
 feat: Uma nova feature.
 fix: Correção de um bug.
 chore: Uma alteração que não é nem uma nova feature, nem uma correção.
+
+## Projeto Backend Ecommerce PEGASUS com NestJS ##
+# O que está incluso:
+
+- NestJS
+- Mongoose (para integração com MongoDB)
+- Swagger (para documentação de APIs)
+- JWT (para autenticação)
+
+# Instalação & Inicialização
+Para instalar as dependências e iniciar o servidor, basta rodar na raiz do projeto:
+
+```bash
+npm install
+npm run start:dev
+``` 
+
+# Arquitetura, Dependências Core:
+São as principais dependências do projeto, que precisam ser compreendidas pelo menos minimamente para entender como esta arquitetura funciona.
+
+- NestJS: Um framework para criar aplicações Node.js escaláveis e eficientes.
+- Mongoose: Uma biblioteca de modelagem de dados para MongoDB e Node.js.
+- Swagger: Ferramenta para documentar APIs RESTful.
+- JWT: JSON Web Token, utilizado para autenticação segura.
+
+## Módulos ##
+Os módulos representam as principais áreas de funcionalidade da aplicação. Cada módulo é responsável por uma parte específica do sistema e inclui seus próprios controladores, serviços e esquemas.
+
+# Catalog
+Responsável pela gestão dos itens do catálogo de produtos.
+
+# - Controlador (controllers/catalog.controller.ts)
+    create: Cria novos itens no catálogo.
+    findAll: Recupera todos os itens do catálogo.
+    findOne: Recupera um item específico do catálogo pelo ID.
+    update: Atualiza um item específico do catálogo pelo ID.
+    remove: Remove um item específico do catálogo pelo ID.
+
+# - Serviço (services/catalog.service.ts)
+    create: Lida com a lógica de criação de novos itens no catálogo.
+    findAll: Lida com a lógica de recuperação de todos os itens do catálogo.
+    findOne: Lida com a lógica de recuperação de um item específico do catálogo.
+    update: Lida com a lógica de atualização de um item específico do catálogo.
+    delete: Lida com a lógica de remoção de um item específico do catálogo.
+
+# - Esquema (schemas/catalog.schema.ts)
+Define a estrutura dos documentos no MongoDB para o catálogo de produtos. Inclui validações e transformação de dados.
+
+# - DTOs (dtos/create.catalog.dto.ts e dtos/update.catalog.dto.ts)
+Define a estrutura dos dados esperados ao criar ou atualizar itens do catálogo.
+
+# - Repositório (repositories/catalog.repository.ts)
+Interage diretamente com o MongoDB para realizar operações de CRUD.
+
+# - Casos de Uso (use-cases/find-catalog.usercase.ts e use-cases/manage-catalog.usecase.ts)
+Define a lógica de negócio específica para encontrar e gerenciar itens do catálogo.
+
+## Outras Dependências e Configurações ##
+
+# Configuração do MongoDB
+A conexão com o MongoDB é configurada através do MongooseModule no arquivo de módulo principal (app.module.ts). A string de conexão pode ser configurada no mesmo arquivo.
+
+# Autenticação e Autorização
+Utiliza-se JWT para autenticação. O AuthGuard protege as rotas que requerem autenticação. As rotas protegidas são marcadas com @UseGuards(AuthGuard).
+
+# Swagger
+A documentação das APIs é gerada automaticamente pelo Swagger. Para acessar a documentação, inicie o servidor e navegue até http://localhost:3000/api.
+
+# Estrutura dos Módulos
+Cada módulo segue uma estrutura semelhante:
+
+    Controller: Gerencia as requisições HTTP e retorna as respostas adequadas.
+    Service: Contém a lógica de negócios.
+    Repository: Interage com o banco de dados.
+    Schema: Define a estrutura dos dados.
+    DTOs: Define a estrutura dos dados recebidos nas requisições.
+    Use Cases: Define casos de uso específicos para operações mais complexas.
+
+Exemplo de Estrutura de Módulo: Catalog
+
+    controllers/catalog.controller.ts: Controlador principal para o catálogo.
+    services/catalog.service.ts: Serviço principal para o catálogo.
+    schemas/catalog.schema.ts: Esquema Mongoose para o catálogo.
+    dtos/create.catalog.dto.ts: DTO para criação de itens do catálogo.
+    dtos/update.catalog.dto.ts: DTO para atualização de itens do catálogo.
+    repositories/catalog.repository.ts: Repositório para operações de CRUD no catálogo.
+    use-cases/find-catalog.usercase.ts: Caso de uso para encontrar itens no catálogo.
+    use-cases/manage-catalog.usecase.ts: Caso de uso para gerenciar itens no catálogo.
+
+
+
+## Critérios de avaliação: ##
+
+# 1. Definição Clara dos Modelos
+
+Os modelos estão bem definidos nos arquivos de esquema (*.schema.ts) usando o Mongoose. Cada modelo (Catalog, User, ShoppingCart) define claramente os atributos necessários, tipos de dados e validações através de decorators do Mongoose e do Swagger (@nestjs/swagger).
+
+
+# 2. Separação da Lógica de Negócios
+
+A lógica de negócios está separada nos arquivos de serviço (*.service.ts) e nos casos de uso (usecases/). Os controladores (controllers/*.controller.ts) lidam apenas com a interação HTTP e delegam a lógica de negócios aos serviços. Não há lógica de negócios nos controladores.
+
+
+# 3. Tratamento de Respostas
+
+As respostas das APIs são tratadas de forma estruturada e amigável. Utiliza-se o Swagger para documentação explícita das respostas esperadas (@ApiResponse, @ApiBadRequestResponse, @ApiNotFoundResponse, @ApiInternalServerErrorResponse).
+
+
+# 4. Serializers
+
+O processo de serialização é tratado de maneira implícita pelo Mongoose ao definir os esquemas (CatalogSchema, UserSchema, etc.). O Mongoose serializa automaticamente os objetos para JSON ao retorná-los nas respostas das APIs.
+
+
+# 5. Clareza e Organização do Projeto Frontend (Next.js)
+
+O projeto frontend utiliza Next.js com Tailwind CSS e next-icons. A estrutura das páginas é organizada em containers (index.js) que conectam com as stores e componentes responsáveis pela interface visual. Componentes reutilizáveis e comportamentais são organizados de forma clara em diretórios específicos.
+
+
+# 6. Uso de Contexto no Frontend
+
+O contexto no frontend é utilizado para gerenciar o estado global da aplicação, facilitando a passagem de dados entre componentes sem a necessidade de prop drilling. Isso melhora a manutenção e a escalabilidade do código.
+
+
+# 7. Mecanismos de Autenticação
+
+Implementa-se o mecanismo de autenticação usando @ApiBearerAuth(), @UseGuards(AuthGuard) nos controladores. O AuthGuard implementa a lógica de autenticação JWT, protegendo as rotas relevantes.
+
+
+# 8. Controle de Acesso
+
+O controle de acesso é implementado através de AuthGuard e roles específicas nos módulos, garantindo que apenas usuários autorizados possam acessar recursos protegidos.
+
+
+# 9. Configuração e Conexão com o MongoDB
+
+A configuração e a conexão com o MongoDB são gerenciadas pelo Mongoose, utilizando MongooseModule do NestJS nos módulos relevantes (imports e exports).
+
+
+# 10. Operações CRUD
+
+As operações CRUD são eficientes e corretas, implementadas nos serviços e repositórios (Repository) de cada entidade (Catalog, User, ShoppingCart). Utiliza-se métodos do Mongoose como find, findOne, findByIdAndUpdate, deleteOne para operações de leitura e modificação.
+
+
+# 11. Tratamento de Exceções
+
+As exceções são tratadas de maneira apropriada nos serviços e controladores, utilizando HttpException para erros HTTP e exceções específicas (NotFoundException, InternalServerErrorException) para erros de negócio e validação.
+
+
+# 12. Estrutura e Organização do Repositório
+
+O repositório foi estruturado de maneira organizada e dividida em duas branches principais: uma para o backend e outra para o frontend, seguindo boas práticas de desenvolvimento. 
+
+
+# 13. Documentação e Commits
+
+Os commits seguem um padrão claro que ajuda na compreensão das mudanças realizadas no código. Utiliza-se o seguinte formato: <type>(scope): <description>, onde type pode ser feat, fix, docs, build, refactor, entre outros. Isso facilita o rastreamento de alterações e a manutenção do histórico do projeto.
+
+
+# 14. Uso de Repository com MongoDB
+
+O uso de repositórios (Repository) com o MongoDB é efetuado através do Mongoose, abstraindo as operações de banco de dados e encapsulando a lógica de persistência.
