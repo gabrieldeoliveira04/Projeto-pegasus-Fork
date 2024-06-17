@@ -13,7 +13,7 @@ import { AuthModule } from './auth/auth.module';
     TransactionModule,
     UsersModule,
     AuthModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/pegasus-shop'), 
+    MongooseModule.forRoot('mongodb+srv://carlosgfkp:senha123@cluster0.eb17wf4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'), 
   ],
   controllers: [],
   providers: [],
