@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body{
+  background-color: whitesmoke;
+}
+
+.bg-primario {
+  background-color: #365DAA;
+}
+
+.fixed {
+  position: fixed;
+  z-index: 50;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.transform {
+  transform: translateX(100%);
+}
+
+.transition-transform {
+  transition: transform 0.3s ease;
+}
+
+.translate-x-0 {
+  transform: translateX(0);
+}
+
+.translate-x-full {
+  transform: translateX(100%);
+}
+
+.z-50 {
+  z-index: 50;
+}

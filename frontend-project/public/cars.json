@@ -1,0 +1,101 @@
+[
+  {
+    "marca": "Aston-Martin",
+    "modelo": "BDS",
+    "motorizacao": "5.7 V12 turbo gasolina",
+    "carroceria": "Coupe",
+    "transmissao": "Automático",
+    "preco": "R$ 4.200.000",
+    "ano": 2022,
+    "versao": "Luxury",
+    "descricao": "Um dos mais luxuosos e potentes coupés da Aston-Martin, equipado com motor V12 turbo."
+  },
+  {
+    "marca": "Ferrari",
+    "modelo": "458 Spidey",
+    "motorizacao": "3.9 V8 turbo gasolina",
+    "carroceria": "Conversível",
+    "transmissao": "F1-DCT",
+    "preco": "R$ 3.200.000",
+    "ano": 2018,
+    "versao": "Standard",
+    "descricao": "O Ferrari 458 Spidey combina performance esportiva com o prazer de dirigir um conversível italiano."
+  },
+  {
+    "marca": "Porsche",
+    "modelo": "911",
+    "motorizacao": "3.8 24V H6 gasolina turbo",
+    "carroceria": "Cabriolet",
+    "transmissao": "PDK",
+    "preco": "R$ 1.790.000",
+    "ano": 2024,
+    "versao": "GT3 RS",
+    "descricao": "O Porsche 911 GT3 RS é um ícone entre os esportivos, conhecido pela sua performance e dirigibilidade."
+  },
+  {
+    "marca": "Lamborghini",
+    "modelo": "Aventador",
+    "motorizacao": "6.5 V12 gasolina",
+    "carroceria": "Conversível",
+    "transmissao": "Automático",
+    "preco": "R$ 9.500.000",
+    "ano": 2021,
+    "versao": "SVJ ISR",
+    "descricao": "O Lamborghini Aventador SVJ ISR é um supercarro com design agressivo e motor V12 poderoso."
+  },
+  {
+    "marca": "Ferrari",
+    "modelo": "812 GTS",
+    "motorizacao": "6.5 V12 gasolina",
+    "carroceria": "Conversível",
+    "transmissao": "F1-DCT",
+    "preco": "R$ 7.700.000",
+    "ano": 2023,
+    "versao": "Performance",
+    "descricao": "O Ferrari 812 GTS é um conversível de alta performance com motor V12, ideal para entusiastas da velocidade."
+  },
+  {
+    "marca": "Porsche",
+    "modelo": "Taycan",
+    "motorizacao": "4 Cross Turismo elétrico",
+    "carroceria": "SUV",
+    "transmissao": "Automático",
+    "preco": "R$ 690.000",
+    "ano": 2022,
+    "versao": "Turbo",
+    "descricao": "O Porsche Taycan Turbo é um SUV elétrico que combina esportividade com tecnologia sustentável."
+  },
+  {
+    "marca": "Mercedes-Benz",
+    "modelo": "AMG GT",
+    "motorizacao": "4.0 V8 turbo gasolina",
+    "carroceria": "Sedan",
+    "transmissao": "R 7G DCT",
+    "preco": "R$ 2.150.000",
+    "ano": 2020,
+    "versao": "Standard",
+    "descricao": "O Mercedes-AMG GT é um sedan esportivo com design elegante e motor V8 turbo potente."
+  },
+  {
+    "marca": "Lamborghini",
+    "modelo": "Urus",
+    "motorizacao": "4.0 V8 turbo gasolina",
+    "carroceria": "SUV",
+    "transmissao": "Automático",
+    "preco": "R$ 3.200.000",
+    "ano": 2022,
+    "versao": "LP650-4",
+    "descricao": "O Lamborghini Urus LP650-4 é um SUV de alto desempenho com motor V8 turbo, perfeito para quem busca luxo e velocidade."
+  },
+  {
+    "marca": "McLaren",
+    "modelo": "Artura",
+    "motorizacao": "3.0 V6 biturbo híbrido",
+    "carroceria": "Cupê",
+    "transmissao": "Automática",
+    "preco": "R$ 2.790.000",
+    "ano": 2023,
+    "versao": "Standard",
+    "descricao": "O McLaren Artura é um cupê híbrido com motor V6 biturbo, projetado para oferecer uma experiência de direção emocionante."
+  }
+]
