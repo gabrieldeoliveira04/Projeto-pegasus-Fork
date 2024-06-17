@@ -129,6 +129,8 @@ Escopo do Projeto: E-commerce para Loja de Carros
 - Tailwind CSS
 - next-icons
 
+## Porta http://localhost:3000/
+
 ## Install & Start
 
 Para instalar basta rodar na raiz do projeto:
@@ -136,6 +138,12 @@ Para instalar basta rodar na raiz do projeto:
 ```bash
 npm install
 npm run dev
+
+DEPENDENCIAS (caso precise separadamente):
+npm install next
+npm install react-icons
+npm install react-icons
+
 ```
 ## Arquitetura
 Dependências Core
