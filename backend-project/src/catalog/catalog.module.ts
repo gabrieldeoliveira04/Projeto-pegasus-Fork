@@ -23,7 +23,6 @@ import { ManageCatalogUseCase } from './use-cases/manage-catalog.usecase';
     CatalogService,
     FindCatalogUseCase,
     ManageCatalogUseCase,
-    MongooseModule.forFeature([{ name: Catalog.name, schema: CatalogSchema }])
   ],
 })
 export class CatalogModule {}
