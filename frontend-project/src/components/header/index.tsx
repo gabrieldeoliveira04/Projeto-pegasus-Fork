@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useState, useEffect } from "react";
 import logoImg from "public/logo.svg";
 import Image from "next/image";
@@ -8,6 +8,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { Input } from "@/components/input/index";
 import { Sidebar } from "@/components/sideBar/sideBar";
+import { ThemeButton } from "../themeChange/themeButton";
 
 interface Props {
   user: any; // Tipagem do objeto de usuário, ajuste conforme necessário
@@ -23,7 +24,7 @@ export function Header({ user }: Props) {
 
   // Verifica se o token JWT está presente no localStorage
   useEffect(() => {
-    const token = localStorage.getItem('jwtToken');
+    const token = localStorage.getItem("jwtToken");
     if (token) {
       setIsLoggedIn(true); // Define isLoggedIn como true se o token existir
     } else {
@@ -33,55 +34,58 @@ export function Header({ user }: Props) {
 
   return (
     <>
-      <header className="w-full h-16 bg-primario text-white px-6">
+      <header className="w-full h-16 bg-primario text-white dark:bg-zinc-900 dark:text-white px-4 md:px-6 transition-colors">
         <div className="max-w-screen-xl mx-auto">
-          <nav className="flex items-center justify-between">
-            <Link href="/">
-              <div className="cursor-pointer">
-                <Image
-                  src={logoImg}
-                  alt="Logo do site pegasus"
-                  width={150}
-                  height={80} // Corrigido o valor da altura
-                  quality={100}
-                  priority={true}
-                />
-              </div>
+          <nav className="flex items-center justify-between w-full gap-4">
+            {/* Logo */}
+            <Link href="/" className="shrink-0">
+              <Image
+                src={logoImg}
+                alt="Logo do site pegasus"
+                width={150}
+                height={80}
+                quality={100}
+                priority={true}
+              />
             </Link>
 
-            <div className="items-center ml-auto hidden md:flex mr-16">
+            {/* Input de busca (esconde em telas pequenas) */}
+            <div className="hidden md:flex flex-1 max-w-sm">
               <Input />
             </div>
 
-            <div className="ml-5">
-              <Link href="/favoritos" className="flex items-center">
-                <FaRegHeart size={26} color="white" />
-                <span className="hidden sm:flex ml-3">Favoritos</span>
+            {/* Grupo de ícones e botões */}
+            <div className="flex items-center gap-4 sm:gap-6">
+              <Link
+                href="/favoritos"
+                className="flex items-center hover:text-gray-400 dark:hover:text-sky-500 transition-colors"
+              >
+                <FaRegHeart size={22} />
+                <span className="hidden sm:inline ml-2">Favoritos</span>
               </Link>
-            </div>
 
-            <div className="ml-16">
-              <Link href="/carrinho-de-compra" className="flex items-center">
-                <RiShoppingBagLine size={30} color="white" />
-                <span className="hidden sm:flex ml-3">Carrinho</span>
+              <Link
+                href="/carrinho-de-compra"
+                className="flex items-center hover:text-gray-400 dark:hover:text-sky-500 transition-colors"
+              >
+                <RiShoppingBagLine size={24} />
+                <span className="hidden sm:inline ml-2">Carrinho</span>
               </Link>
-            </div>
 
-            <div className="ml-16">
-              {/* Verificação condicional com if-else */}
+              <div className="text-zinc-900 dark:text-white"><ThemeButton /></div>
+              
+
               {isLoggedIn ? (
                 <button
                   onClick={toggleSidebar}
-                  className="flex items-center focus:outline-none"
+                  className="flex items-center hover:text-gray-400 dark:hover:text-sky-500 transition-colors"
                 >
-                  <FaUserCircle size={30} color="white" />
+                  <FaUserCircle size={24} />
                 </button>
               ) : (
                 <Link href="/login">
-                  <button className="flex items-center focus:outline-none">
-                    <span className="text-white text-sm border border-white rounded px-2 py-1">
-                      Faça Login
-                    </span>
+                  <button className="text-sm border border-zinc-900 dark:border-white rounded px-2 py-1 hover:bg-zinc-100 dark:hover:text-sky-500 transition-colors">
+                    Faça Login
                   </button>
                 </Link>
               )}

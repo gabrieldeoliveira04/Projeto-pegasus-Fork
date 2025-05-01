@@ -24,7 +24,7 @@ const CatalogItem: React.FC<CatalogItemProps> = ({ data }) => {
 
   return (
     <Container>
-    <section className="w-full border p-4 rounded-md bg-white shadow-lg flex flex-col sm:flex-row">
+    <section className="w-full border p-4 rounded-md bg-white dark:bg-zinc-900 dark:text-white shadow-lg flex flex-col sm:flex-row">
        {/* Seção de imagens */}
        <div className="flex flex-col sm:w-full justify-center items-center sm:items-start sm:ml-6 sm:mr-6 mb-4 sm:mb-0">
           <Image 
@@ -62,7 +62,7 @@ const CatalogItem: React.FC<CatalogItemProps> = ({ data }) => {
         <div className="mb-auto mt-4 sm:mt-0">
           <h2 className="text-2xl font-bold mb-2">{data.marca} {data.modelo}</h2>
           <p className="text-lg text-green-600 font-semibold mb-4">Preço: {data.preco}</p>
-          <div className="text-base text-gray-600 mb-8">
+          <div className="text-base text-gray-600 dark:text-slate-300 mb-8">
             <p>Motorização: {data.motorizacao}</p>
             <p>Transmissão: {data.transmissao}</p>
             <p>Ano: {data.ano}</p>
