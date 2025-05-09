@@ -1,14 +1,19 @@
-import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { FavoriteService } from '../services/favorite.services';
 
 @Injectable()
-export class FindFavoriteUseCase {
-  constructor(private readonly favoriteRepository: FavoriteRepository) {}
+export class FavoriteUseCase {
+  constructor(private readonly favoriteService: FavoriteService) {}
 
-  async findAll(): Promise<Favorite[]> {
-    try {
-      return await this.favoriteRepository.findAll();
-    } catch (error) {
-      throw new InternalServerErrorException('Failed to fetch favorite items');
-    }
+  async executeAdd(userId: string, productId: string) {
+    return this.favoriteService.addFavorite(userId, productId);
+  }
+
+  async executeGet(userId: string) {
+    return this.favoriteService.getFavorites(userId);
+  }
+
+  async executeDelete(userId: string, productId: string) {
+    return this.favoriteService.removeFavorite(userId, productId);
   }
 }
