@@ -2,8 +2,8 @@ import { Body, Controller, Delete, Get, Param, Post, Req, UnauthorizedException,
 import { Request } from 'express';
 import { CreateFavoriteDto } from '../dtos/create.favorite.dtos';
 import { FavoriteUseCase } from '../use-cases/find-favorites.usecase';
-import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { ApiTags, ApiBearerAuth, ApiBody } from '@nestjs/swagger';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('favorites')
 @ApiTags('Favorites')
@@ -12,41 +12,54 @@ export class FavoriteController {
   constructor(private readonly favoriteUseCase: FavoriteUseCase) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(AuthGuard)
+  @ApiBody({
+    description: 'Adiciona um produto aos favoritos',
+    type: CreateFavoriteDto,
+    examples: {
+      'application/json': {
+        value: {
+          productId: 'id',
+        },
+      },
+    },
+  })
   async add(
     @Req() req: Request, 
     @Body() dto: CreateFavoriteDto,
   ) {
-    const userId = req.user['id'];
+    console.log('User:', req.user);
+
+    const userEmail = req.user['email'];
   
-    if (!userId) {
+    if (!userEmail) {
       throw new UnauthorizedException('Usuário não encontrado no token.');
     }
   
-    return this.favoriteUseCase.executeAdd(userId, dto.productId);
+    return this.favoriteUseCase.executeAdd(userEmail, dto.productId);
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard) // corrigido aqui também
+  @UseGuards(AuthGuard) // corrigido aqui também
   async getAll(@Req() req: Request) {
-    const userId = req.user['id'];
+    const userEmail = req.user['email'];
 
-    if (!userId) {
+    if (!userEmail) {
       throw new UnauthorizedException('Usuário não encontrado no token.');
     }
 
-    return this.favoriteUseCase.executeGet(userId);
+    return this.favoriteUseCase.executeGet(userEmail);
   }
 
   @Delete(':productId')
-  @UseGuards(JwtAuthGuard) // corrigido aqui também
+  @UseGuards(AuthGuard) // corrigido aqui também
   async remove(@Req() req: Request, @Param('productId') productId: string) {
-    const userId = req.user['id'];
+    const userEmail = req.user['email'];
 
-    if (!userId) {
+    if (!userEmail) {
       throw new UnauthorizedException('Usuário não encontrado no token.');
     }
 
-    return this.favoriteUseCase.executeDelete(userId, productId);
+    return this.favoriteUseCase.executeDelete(userEmail, productId);
   }
 }

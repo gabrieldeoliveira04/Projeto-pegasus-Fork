@@ -29,6 +29,9 @@ export class AuthGuard implements CanActivate {
       // Verifica o token usando o serviço JWT
       const decodedToken = await this.jwtService.verifyAsync(token);
 
+      // Atribui o usuário decodificado no request
+      request.user = decodedToken;
+
       // Verifica se o token corresponde a critérios personalizados
       if (!this.isValidToken(decodedToken, token)) {
         throw new UnauthorizedException('Acesso proibido. Token inválido ou expirado.');
