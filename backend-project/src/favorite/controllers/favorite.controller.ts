@@ -40,7 +40,7 @@ export class FavoriteController {
   }
 
   @Get()
-  @UseGuards(AuthGuard) // corrigido aqui também
+  @UseGuards(AuthGuard)
   async getAll(@Req() req: Request) {
     const userEmail = req.user['email'];
 
@@ -52,7 +52,7 @@ export class FavoriteController {
   }
 
   @Delete(':productId')
-  @UseGuards(AuthGuard) // corrigido aqui também
+  @UseGuards(AuthGuard)
   async remove(@Req() req: Request, @Param('productId') productId: string) {
     const userEmail = req.user['email'];
 
