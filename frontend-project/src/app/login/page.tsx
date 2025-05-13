@@ -1,7 +1,8 @@
 'use client';
 import Image from 'next/image';
-import Fundo_login from '../../../public/Fundo_login.png';
+import Fundo_login from '@/public/Fundo_login.png';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -74,9 +75,13 @@ export default function LoginPage() {
               />
             </div>
             <div className="text-center">
-              <button type="submit" className="w-full py-2 px-4 rounded bg-blue-500 hover:bg-blue-700 text-white">
+              <button type="submit" className="p-4 rounded bg-blue-500 hover:bg-blue-700 text-white">
                 Entrar
               </button>
+
+              <Link href="/cadastro" className="p-4 rounded bg-orange-500 hover:bg-orange-700 text-white">
+                Cadastrar
+              </Link>
             </div>
           </form>
         </div>
