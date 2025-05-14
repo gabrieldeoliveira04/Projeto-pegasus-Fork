@@ -1,11 +1,12 @@
 "use client";
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { UserType } from "@/types/user";
 
 interface SidebarProps {
     isOpen: boolean;
     onClose: () => void;
-    user: { name: string } | null;
+    user?: UserType;
 }
 
 export function Sidebar({ isOpen, onClose, user }: SidebarProps) {

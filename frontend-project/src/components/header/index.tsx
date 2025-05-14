@@ -9,9 +9,10 @@ import { FaRegHeart } from "react-icons/fa";
 import { Input } from "@/components/input/index";
 import { Sidebar } from "@/components/sideBar/sideBar";
 import { ThemeButton } from "../themeChange/themeButton";
+import { UserType } from "@/types/user";
 
 interface Props {
-  user: any; // Tipagem do objeto de usuário, ajuste conforme necessário
+  user?: UserType; // Tipagem do objeto de usuário, ajuste conforme necessário
 }
 
 export function Header({ user }: Props) {
