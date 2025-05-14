@@ -12,7 +12,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('https://ecommerce-repository.onrender.com/catalog')
+    fetch('http://127.0.0.1:3001/catalog')
       .then(response => {
         if (!response.ok) {
           throw new Error('Erro ao carregar os dados do catálogo');
