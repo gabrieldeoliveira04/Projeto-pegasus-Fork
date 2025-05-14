@@ -36,7 +36,7 @@ const Cart: React.FC = () => {
 
         console.log('Authorization Header:', `Bearer ${token}`); // Log para verificar o cabeçalho de Authorization
 
-        const response = await fetch('http://localhost:3001/shopping-cart', {
+        const response = await fetch('https://ecommerce-repository.onrender.com/shopping-cart', {
           headers: {
             Authorization: `Bearer ${token}`, // Envia o token JWT no cabeçalho Authorization
             'Content-Type': 'application/json', // Adicionando Content-Type para POST/PUT/DELETE, se necessário

@@ -16,7 +16,7 @@ export default function Home() {
     setId(idFromPath);
 
     if (idFromPath) {
-      fetch(`http://127.0.0.1:3001/catalog/${idFromPath}`)
+      fetch(`https://ecommerce-repository.onrender.com/catalog/${idFromPath}`)
         .then(response => {
           if (!response.ok) {
             throw new Error('Erro ao carregar os dados do carro');
