@@ -50,17 +50,19 @@ export default function Cadastro() {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <div className="absolute top-0 m-4 flex items-center justify-center h-full w-full max-w-lg sm:max-w-md md:max-w-md lg:max-w-lg">
-      <div className="relative w-full h-screen">
-        <Image
-          src={Fundo_login}
-          alt="Fundo Login"
-          layout="fill"
-          quality={100}
-          className="w-full h-full object-cover"
-        />
-      </div>
+<div className="fixed top-0 left-0 w-screen h-screen">
+  <Image
+    src={Fundo_login}
+    alt="Fundo Login"
+    layout="fill"
+    objectFit="cover"
+    quality={100}
+    className="w-full h-full"
+  />
+</div>
 
-      <div className="bg-transparent text-white p-6 border border-white rounded-lg backdrop-filter backdrop-blur-lg w-full">
+
+      <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center z-10">
         <h2 className="text-2xl mb-4 text-center">Faça seu cadastro</h2>
         <div className='mb-4'>
           <form onSubmit={handleSubmit} className="flex flex-col">
