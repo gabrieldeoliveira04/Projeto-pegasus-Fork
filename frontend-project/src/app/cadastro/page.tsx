@@ -61,7 +61,7 @@ export default function Cadastro() {
 
       <div className="fixed left-0 w-screen h-screen flex justify-end items-center p-5  z-10 pr-20">
         <div className='mb-4'>
-        <h2 className="text-2xl mb-4 text-white text-center p-5">Faça seu cadastro</h2>
+        <h2 className="text-2xl text-white text-center p-3">Faça seu cadastro</h2>
           <form onSubmit={handleSubmit} className="flex flex-col">
             <label htmlFor="Name" className="block text-sm font-medium">
               Nome:
