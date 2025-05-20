@@ -49,17 +49,16 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 export default function Cadastro() {
   const [showPassword, setShowPassword] = useState(false);
   return (
-    <div className="fixed left-0 w-screen h-screen flex justify-end items-center  z-10 pr-20">
-<div className="fixed left-0 w-screen h-screen">
-  <Image
-    src={Fundo_login}
-    alt="Fundo Login"
-    layout="fill"
-    objectFit="cover"
-    quality={100}
-    className="w-full h-full"
-  />
-</div>
+    <div className="fixed top-0 left-0 w-full h-screen flex justify-end items-center">
+      <Image 
+        src={Fundo_login}
+        alt="Fundo Login"
+        layout="fill"
+        objectFit="cover"
+        quality={100}
+        className="w-full h-full object-cover "
+      />
+
       <div className="fixed left-0 w-screen h-screen flex justify-end items-center p-5  z-10 pr-20">
         <div className='mb-4'>
         <h2 className="text-2xl mb-4 text-white text-center p-5">Faça seu cadastro</h2>
