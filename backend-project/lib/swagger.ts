@@ -1,22 +1,42 @@
-import swaggerJsdoc from "swagger-jsdoc";
-import swaggerUi from "swagger-ui-express";
-import express from "express";
+import type { OpenAPIObject } from "openapi3-ts/oas30";
 
-const app = express();
 
-const swaggerOptions = {
-  swaggerDefinition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Cadastro",
-      version: "1.0.0",
-      description: "Documentação da API de cadastro de usuários"
+export const swaggerDocument: OpenAPIObject = {
+  openapi: "3.0.0",
+  info: {
+    title: "API de Cadastro Pegasus",
+    version: "1.0.0",
+    description: "Documentação da API de cadastro de usuários.",
+  },
+  paths: {
+    "/api/cadastro": {
+      post: {
+        summary: "Cadastrar novo usuário",
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  nome: { type: "string" },
+                  email: { type: "string" },
+                  CPF: { type: "string" },
+                  senha: { type: "string" },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          200: {
+            description: "Usuário cadastrado com sucesso",
+          },
+          400: {
+            description: "Erro de validação ou e-mail duplicado",
+          },
+        },
+      },
     },
   },
-  apis: ["./src/app/api/user/route.ts"],
 };
-
-const swaggerDocs = swaggerJsdoc(swaggerOptions);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-
-export default app;

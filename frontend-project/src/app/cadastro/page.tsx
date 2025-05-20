@@ -7,10 +7,10 @@ import Image from "next/image";
 import Fundo_login from "../../public/Fundo_login.png";
 
 const schema = yup.object().shape({
-  name: yup.string().required(),
+  nome: yup.string().required(),
   email: yup.string().email().required(),
-  cpf: yup.string().length(11).required(),
-  password: yup.string().min(6).required(),
+  CPF: yup.string().length(11).required(),
+  senha: yup.string().min(6).required(),
 });
 
 
@@ -20,10 +20,10 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
   const form = event.target as HTMLFormElement;
   const formData = new FormData(form);
   const data = {
-    name: formData.get("Name"),
-    email: formData.get("E-mail"),
-    cpf: formData.get("CPF"),
-    password: formData.get("Password"),
+    nome: formData.get("nome"),
+    email: formData.get("email"),
+    CPF: formData.get("CPF"),
+    senha: formData.get("senha"),
   };
 
   try {
