@@ -35,7 +35,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="w-full h-full flex justify-end items-center">
+    <div className="fixed top-0 w-full h-full flex justify-end items-center">
       <Image
         src={Fundo_login}
         alt="Fundo Login"
