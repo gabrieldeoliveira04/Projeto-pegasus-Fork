@@ -1,11 +1,15 @@
 import { Module } from '@nestjs/common';
-import { CadastroController } from './cadastro.controller';
+import { MongooseModule } from '@nestjs/mongoose';
 import { CadastroService } from './cadastro.service';
+import { CadastroController } from './cadastro.controller';
+import { Usuario, UsuarioSchema } from './usuario.schema';
 
 @Module({
-  controllers: [CadastroController],
+  imports: [
+    MongooseModule.forFeature([{ name: Usuario.name, schema: UsuarioSchema }]),
+  ],
   providers: [CadastroService],
-  exports: [CadastroService], 
+  controllers: [CadastroController],
 })
 export class CadastroModule {}
 
