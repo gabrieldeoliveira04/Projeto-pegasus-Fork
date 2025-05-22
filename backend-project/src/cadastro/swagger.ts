@@ -13,7 +13,7 @@ const swaggerOptions = {
       description: "Documentação da API de cadastro de usuários"
     },
   },
-  apis: ["./src/app/api/user/route.ts"],
+  apis: ["./src/app/route.ts"],
 };
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
