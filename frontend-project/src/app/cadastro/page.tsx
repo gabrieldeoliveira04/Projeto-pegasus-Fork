@@ -27,7 +27,7 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
   };
 
   try {
-    const response = await fetch('/api/cadastro', {
+    const response = await fetch('http://localhost:3001/Cadastro', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ export default function Cadastro() {
       />
 
       <div className="fixed left-0 w-screen h-screen flex justify-end items-center p-5  z-10 pr-20">
-        <div className='mb-4'>
+        <div className='text-white mb-4'>
         <h2 className="text-2xl text-white text-center p-3">Faça seu cadastro</h2>
           <form onSubmit={handleSubmit} className="flex flex-col">
             <label htmlFor="Name" className="block text-sm font-medium">
@@ -68,7 +68,7 @@ export default function Cadastro() {
             </label>
             <input
               type="text"
-              id="Name"
+              id="nome"
               className="mt-1 p-2 w-full bg-transparent border border-white rounded text-white"
               required
             />
@@ -82,7 +82,7 @@ export default function Cadastro() {
             <label htmlFor="E-mail">
               <input
                 type="email"
-                id="E-mail"
+                id="email"
                 className="mt-1 p-2 w-full bg-transparent border border-white rounded text-white"
                 required
               />
@@ -110,7 +110,7 @@ export default function Cadastro() {
             <div className="relative w-full">
               <input
                 type={showPassword ? "text" : "password"}
-                id="Password"
+                id="senha"
                 name="Password"
                 className="mt-1 p-2 w-full bg-transparent border border-white rounded text-white pr-10"
                 required
