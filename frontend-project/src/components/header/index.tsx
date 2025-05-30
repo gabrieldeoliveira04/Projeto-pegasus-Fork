@@ -4,19 +4,24 @@ import logoImg from "@/public/logo.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { RiShoppingBagLine } from "react-icons/ri";
-import { FaUserCircle } from "react-icons/fa";
-import { FaRegHeart } from "react-icons/fa";
+import { FaUserCircle, FaRegHeart } from "react-icons/fa";
 import { Input } from "@/components/input/index";
 import { Sidebar } from "@/components/sideBar/sideBar";
 import { ThemeButton } from "../themeChange/themeButton";
+import { usePathname } from "next/navigation";
 
 interface Props {
-  user: any; // Tipagem do objeto de usuário, ajuste conforme necessário
+  user: any; // Ajuste a tipagem conforme necessário
 }
 
 export function Header({ user }: Props) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Chama o hook usePathname para obter a rota atual
+  const pathname = usePathname();
+  // Ocultar ícones caso o usuário esteja na página de cadastro ou login
+  const hideIcons = pathname === "/cadastro" || pathname === "/login";
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -25,11 +30,7 @@ export function Header({ user }: Props) {
   // Verifica se o token JWT está presente no localStorage
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
-    if (token) {
-      setIsLoggedIn(true); // Define isLoggedIn como true se o token existir
-    } else {
-      setIsLoggedIn(false); // Define isLoggedIn como false se o token não existir
-    }
+    setIsLoggedIn(!!token);
   }, []);
 
   return (
@@ -49,31 +50,38 @@ export function Header({ user }: Props) {
               />
             </Link>
 
-            {/* Input de busca (esconde em telas pequenas) */}
-            <div className="hidden md:flex flex-1 max-w-sm">
-              <Input />
-            </div>
+            {/* Input de busca (exibe somente se hideIcons for false) */}
+            {!hideIcons && (
+              <div className="hidden md:flex flex-1 max-w-sm">
+                <Input />
+              </div>
+            )}
 
             {/* Grupo de ícones e botões */}
             <div className="flex items-center gap-4 sm:gap-6">
-              <Link
-                href="/favoritos"
-                className="flex items-center hover:text-gray-400 dark:hover:text-sky-500 transition-colors"
-              >
-                <FaRegHeart size={22} />
-                <span className="hidden sm:inline ml-2">Favoritos</span>
-              </Link>
+              {!hideIcons && (
+                <>
+                  <Link
+                    href="/favoritos"
+                    className="flex items-center hover:text-gray-400 dark:hover:text-sky-500 transition-colors"
+                  >
+                    <FaRegHeart size={22} />
+                    <span className="hidden sm:inline ml-2">Favoritos</span>
+                  </Link>
 
-              <Link
-                href="/carrinho-de-compra"
-                className="flex items-center hover:text-gray-400 dark:hover:text-sky-500 transition-colors"
-              >
-                <RiShoppingBagLine size={24} />
-                <span className="hidden sm:inline ml-2">Carrinho</span>
-              </Link>
+                  <Link
+                    href="/carrinho-de-compra"
+                    className="flex items-center hover:text-gray-400 dark:hover:text-sky-500 transition-colors"
+                  >
+                    <RiShoppingBagLine size={24} />
+                    <span className="hidden sm:inline ml-2">Carrinho</span>
+                  </Link>
 
-              <div className="text-zinc-900 dark:text-white"><ThemeButton /></div>
-              
+                  <div className="text-zinc-900 dark:text-white">
+                    <ThemeButton />
+                  </div>
+                </>
+              )}
 
               {isLoggedIn ? (
                 <button
