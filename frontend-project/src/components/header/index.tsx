@@ -92,9 +92,11 @@ export function Header({ user }: Props) {
                 </button>
               ) : (
                 <Link href="/login">
-                  <button className="text-sm border border-zinc-900 dark:border-white rounded px-2 py-1 hover:bg-zinc-100 dark:hover:text-sky-500 transition-colors">
-                    Faça Login
-                  </button>
+                  {!hideIcons && (
+                    <button className="text-sm border border-zinc-900 dark:border-white rounded px-2 py-1 hover:bg-zinc-100 dark:hover:text-sky-500 transition-colors">
+                      Faça Login
+                    </button>
+                  )}
                 </Link>
               )}
             </div>

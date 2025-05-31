@@ -1,66 +1,76 @@
 "use client";
-<meta name="viewport" content="width=device-width, initial-scale=1" />;
 
 import React, { useState } from "react";
-import TextComponent from "@/components/Forms/FormCadastro";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Button } from "@/components/ui/button";
 import * as yup from "yup";
 import Image from "next/image";
 import Fundo_login from "../../public/Fundo_login.png";
 import { Eye, EyeOff } from "lucide-react";
+import { Button } from "../../components/ui/button";
 
-const schema = yup.object().shape({
-  nome: yup.string().required(),
-  email: yup.string().email().required(),
-  CPF: yup.string().length(11).required(),
-  senha: yup.string().min(6).required(),
-});
+function Cadastro() {
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [CPF, setCPF] = useState("");
+  const [senha, setSenha] = useState("");
 
-const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  event.preventDefault();
+  const schema = yup.object().shape({
+    nome: yup.string().required(),
+    email: yup.string().email().required(),
+    CPF: yup.string().length(11).required(),
+    senha: yup.string().min(6).required(),
+  });
 
-  const form = event.target as HTMLFormElement;
-  const formData = new FormData(form);
-  const data = {
-    nome: formData.get("nome"),
-    email: formData.get("email"),
-    CPF: formData.get("CPF"),
-    senha: formData.get("senha"),
+
+  const data = { nome, email, CPF, senha };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      // Validação dos dados antes do envio:
+      await schema.validate(data);
+
+      const response = await fetch("https://…", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+    } catch (error: any) {
+      alert("Erro de validação: " + error.message);
+    }
+
+    try {
+      const response = await fetch(
+        "https://zany-fishstick-6prxg74rrvpc4767-3001.app.github.dev/Cadastro",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (response.ok) {
+        alert("Cadastro realizado com sucesso!");
+      } else {
+        alert("Erro ao cadastrar");
+      }
+    } catch (error) {
+      console.error("Erro:", error);
+      alert("Erro ao conectar com o servidor");
+    }
   };
 
-  try {
-    const response = await fetch(
-      "https://zany-fishstick-6prxg74rrvpc4767-3001.app.github.dev/Cadastro",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      },
-    );
-
-    if (response.ok) {
-      alert("Cadastro realizado com sucesso!");
-    } else {
-      alert("Erro ao cadastrar");
-    }
-  } catch (error) {
-    console.error("Erro:", error);
-    alert("Erro ao conectar com o servidor");
-  }
-};
-
-export default function Cadastro() {
   const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div className="relative flex justify-center items-center min-h-screen max-h-screen max-w-screen flex flex-col max-w-sm">
       <div className="absolute w-full lg-w-full inset-0 ">
         <Image
           src={Fundo_login}
           alt="Fundo Login"
-          layout="fill"
+          layout="fill" 
           objectFit="cover"
           quality={100}
           className="mt-0 object-cover blur"
@@ -73,58 +83,52 @@ export default function Cadastro() {
             Faça seu cadastro
           </h2>
           <form onSubmit={handleSubmit} className="flex flex-col">
-            <label htmlFor="Name" className="block text-sm font-medium">
+            <label htmlFor="nome" className="block text-sm font-medium">
               Nome:
             </label>
             <input
+              name="nome"
               type="text"
               id="nome"
               className="mt-1 p-2 w-full bg-transparent border border-white rounded text-white"
+              onChange={(e) => setNome(e.target.value)}
               required
             />
-          </form>
-          {/* estrutura do input */}
-          <form onSubmit={handleSubmit} className="flex flex-col">
-            <label htmlFor="E-mail" className="block text-sm font-medium">
+
+            <label htmlFor="email" className="block text-sm font-medium">
               E-mail:
             </label>
-            {/* texto do input */}
-            <label htmlFor="E-mail">
-              <input
-                type="email"
-                id="email"
-                className="mt-1 p-2 w-full bg-transparent border border-white rounded text-white"
-                required
-              />
-            </label>
-          </form>
-          {/* estrutura do input */}
-          <form onSubmit={handleSubmit} className="flex flex-col"></form>
-          <label htmlFor="CPF" className="block text-sm font-medium">
-            CPF:
-          </label>
-          {/* texto do input */}
-          <label htmlFor="CPF">
             <input
+              name="email"
+              type="email"
+              id="email"
+              className="mt-1 p-2 w-full bg-transparent border border-white rounded text-white"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+
+            <label htmlFor="CPF" className="block text-sm font-medium">
+              CPF:
+            </label>
+            <input
+              name="CPF"
               type="text"
               id="CPF"
               className="mt-1 p-2 w-full bg-transparent border border-white rounded text-white"
+              onChange={(e) => setCPF(e.target.value)}
               required
             />
-          </label>
-          {/* estrutura do input */}
 
-          <form onSubmit={handleSubmit} className="flex flex-col">
-            {/* Campo Senha com botão de mostrar/ocultar */}
-            <label htmlFor="Password" className="block text-sm font-medium">
+            <label htmlFor="senha" className="block text-sm font-medium">
               Senha:
             </label>
             <div className="relative w-full">
               <input
                 type={showPassword ? "text" : "password"}
                 id="senha"
-                name="Password"
+                name="senha"
                 className="mt-1 p-2 w-full bg-transparent border border-white rounded text-white pr-10"
+                onChange={(e) => setSenha(e.target.value)}
                 required
               />
               <Button
@@ -145,10 +149,11 @@ export default function Cadastro() {
                 </button>
               </div>
             </div>
-            {/* BOTÃO CADASTRAR */}
           </form>
         </div>
       </div>
     </div>
   );
 }
+
+export default Cadastro;
