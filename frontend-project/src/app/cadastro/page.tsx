@@ -20,7 +20,6 @@ function Cadastro() {
     senha: yup.string().min(6).required(),
   });
 
-
   const data = { nome, email, CPF, senha };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -30,7 +29,7 @@ function Cadastro() {
       // Validação dos dados antes do envio:
       await schema.validate(data);
 
-      const response = await fetch("https://…", {
+      const response = await fetch("http://localhost:3001/Cadastro", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -40,16 +39,13 @@ function Cadastro() {
     }
 
     try {
-      const response = await fetch(
-        "https://zany-fishstick-6prxg74rrvpc4767-3001.app.github.dev/Cadastro",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await fetch("http://localhost:3001/Cadastro", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
       if (response.ok) {
         alert("Cadastro realizado com sucesso!");
@@ -70,7 +66,7 @@ function Cadastro() {
         <Image
           src={Fundo_login}
           alt="Fundo Login"
-          layout="fill" 
+          layout="fill"
           objectFit="cover"
           quality={100}
           className="mt-0 object-cover blur"
@@ -78,7 +74,7 @@ function Cadastro() {
       </div>
 
       <div className="m-10 z-10 flex-col flex justify-center items-center min-h-screen p-6 md:p-10 w-full">
-        <div className="bg-black bg-opacity-60 rounded-lg p-6 w-full max-w-sm">
+        <div className="text-white bg-black bg-opacity-60 rounded-lg p-6 w-full max-w-sm">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-6">
             Faça seu cadastro
           </h2>
