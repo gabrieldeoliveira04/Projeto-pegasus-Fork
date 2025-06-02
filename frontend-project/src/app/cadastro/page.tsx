@@ -5,7 +5,8 @@ import * as yup from "yup";
 import Image from "next/image";
 import Fundo_login from "../../public/Fundo_login.png";
 import { Eye, EyeOff } from "lucide-react";
-import { Button } from "../../components/ui/button";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 function Cadastro() {
   const [nome, setNome] = useState("");
@@ -40,6 +41,14 @@ function Cadastro() {
 
     try {
       const response = await fetch("http://localhost:3001/Cadastro", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const response = await fetch("http://localhost:3001/cadastro", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -82,7 +91,7 @@ function Cadastro() {
             <label htmlFor="nome" className="block text-sm font-medium">
               Nome:
             </label>
-            <input
+            <Input
               name="nome"
               type="text"
               id="nome"
@@ -94,7 +103,7 @@ function Cadastro() {
             <label htmlFor="email" className="block text-sm font-medium">
               E-mail:
             </label>
-            <input
+            <Input
               name="email"
               type="email"
               id="email"
@@ -106,7 +115,7 @@ function Cadastro() {
             <label htmlFor="CPF" className="block text-sm font-medium">
               CPF:
             </label>
-            <input
+            <Input
               name="CPF"
               type="text"
               id="CPF"
@@ -119,7 +128,7 @@ function Cadastro() {
               Senha:
             </label>
             <div className="relative w-full">
-              <input
+              <Input
                 type={showPassword ? "text" : "password"}
                 id="senha"
                 name="senha"
@@ -131,7 +140,7 @@ function Cadastro() {
                 type="button"
                 variant="ghost"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 flex items-center p-1 m-1 w-fit"
+                className="absolute inset-y-0 right-0 flex items-center p-1 m-1 w-fit bg-transparent"
               >
                 {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </Button>
