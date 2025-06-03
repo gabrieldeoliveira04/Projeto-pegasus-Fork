@@ -48,14 +48,6 @@ function Cadastro() {
         body: JSON.stringify(data),
       });
 
-      const response = await fetch("http://localhost:3001/cadastro", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
       if (response.ok) {
         alert("Cadastro realizado com sucesso!");
       } else {
