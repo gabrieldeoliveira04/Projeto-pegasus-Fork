@@ -62,20 +62,24 @@ function Cadastro() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="relative flex justify-center items-center min-h-screen max-h-screen max-w-screen flex flex-col max-w-sm">
-      <div className="absolute w-full lg-w-full inset-0 ">
+    <div className="relative flex justify-center items-center w-full h-auto">
+      <div className="absolute w-full lg-w-full inset-0">
         <Image
           src={Fundo_login}
           alt="Fundo Login"
           layout="fill"
           objectFit="cover"
           quality={100}
-          className="mt-0 object-cover blur"
+          className="sm:blur xl:blur-none w-auto h-auto"
         />
       </div>
 
-      <div className="m-10 z-10 flex-col flex justify-center items-center min-h-screen p-6 md:p-10 w-full">
-        <div className="text-white bg-black bg-opacity-60 rounded-lg p-6 w-full max-w-sm">
+      <div className="m-20 z-10 flex-col flex justify-center items-center p-6 md:p-10 w-full">
+        <div
+          className="text-white bg-black bg-opacity-60 rounded-lg p-5 h-full w-full max-w-sm
+          lg:ml-20
+          xl:"
+        >
           <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-6">
             Faça seu cadastro
           </h2>
@@ -87,7 +91,7 @@ function Cadastro() {
               name="nome"
               type="text"
               id="nome"
-              className="mt-1 p-2 w-full bg-transparent border border-white rounded text-white"
+              className="mt-1 p-1 w-full bg-transparent border border-white rounded text-white"
               onChange={(e) => setNome(e.target.value)}
               required
             />

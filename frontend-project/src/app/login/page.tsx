@@ -1,20 +1,20 @@
-'use client';
-import Image from 'next/image';
-import Fundo_login from '@/public/Fundo_login.png';
-import { useState } from 'react';
-import Link from 'next/link';
+"use client";
+import Image from "next/image";
+import Fundo_login from "@/public/Fundo_login.png";
+import { useState } from "react";
+import Link from "next/link";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3001/auth/login', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3001/auth/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
@@ -22,15 +22,15 @@ export default function LoginPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Erro na autenticação');
+        throw new Error(data.message || "Erro na autenticação");
       }
 
       const token = data.token.access_token;
-      localStorage.setItem('jwtToken', token);
-      window.location.href = '/'; // Redireciona o usuário após o login bem-sucedido
+      localStorage.setItem("jwtToken", token);
+      window.location.href = "/"; // Redireciona o usuário após o login bem-sucedido
     } catch (error) {
-      console.error('Erro ao fazer login:', error);
-      alert('Erro ao fazer login. Verifique suas credenciais.');
+      console.error("Erro ao fazer login:", error);
+      alert("Erro ao fazer login. Verifique suas credenciais.");
     }
   };
 
@@ -75,11 +75,17 @@ export default function LoginPage() {
               />
             </div>
             <div className="text-center">
-              <button type="submit" className="p-4 rounded bg-blue-500 hover:bg-blue-700 text-white">
+              <button
+                type="submit"
+                className="p-4 rounded bg-blue-500 hover:bg-blue-700 text-white"
+              >
                 Entrar
               </button>
 
-              <Link href="/cadastro" className="p-4 rounded bg-orange-500 hover:bg-orange-700 text-white">
+              <Link
+                href="/cadastro"
+                className="p-4 rounded bg-orange-500 hover:bg-orange-700 text-white"
+              >
                 Cadastrar
               </Link>
             </div>

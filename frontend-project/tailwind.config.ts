@@ -9,6 +9,15 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+      screens: {
+        'sm': '320px',
+        'md': '375px',
+        'lg': '425px',
+        'xl': '768px',
+        '2xl': '1024px',
+        '3xl': '1440px',    
+        '4k': '3840px',
+      },
   		backgroundImage: {
   			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
   			'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
