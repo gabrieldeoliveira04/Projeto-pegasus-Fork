@@ -8,6 +8,7 @@ export class Favorite extends Document {
 
   @Prop({ required: true })
   productId: string;
+
 }
 
 export const FavoriteSchema = SchemaFactory.createForClass(Favorite);

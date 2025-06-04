@@ -5,6 +5,10 @@ import { FavoriteUseCase } from '../use-cases/find-favorites.usecase';
 import { ApiTags, ApiBearerAuth, ApiBody } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
 
+interface User {
+  email: string;
+};
+
 @Controller('favorites')
 @ApiTags('Favorites')
 @ApiBearerAuth()
@@ -25,7 +29,7 @@ export class FavoriteController {
     },
   })
   async add(
-    @Req() req: Request, 
+    @Req() req: Request  & { user?: User }, 
     @Body() dto: CreateFavoriteDto,
   ) {
     console.log('User:', req.user);
@@ -41,7 +45,7 @@ export class FavoriteController {
 
   @Get()
   @UseGuards(AuthGuard)
-  async getAll(@Req() req: Request) {
+  async getAll(@Req() req: Request  & { user?: User }) {
     const userEmail = req.user['email'];
 
     if (!userEmail) {
@@ -53,7 +57,7 @@ export class FavoriteController {
 
   @Delete(':productId')
   @UseGuards(AuthGuard)
-  async remove(@Req() req: Request, @Param('productId') productId: string) {
+  async remove(@Req() req: Request  & { user?: User }, @Param('productId') productId: string) {
     const userEmail = req.user['email'];
 
     if (!userEmail) {

@@ -5,9 +5,10 @@ import { FavoriteController } from './controllers/favorite.controller';
 import { FavoriteService } from './services/favorite.services';
 import { FavoriteRepository } from './repositories/favorite.repository';
 import { FavoriteUseCase } from './use-cases/find-favorites.usecase';
+import { CatalogModule } from 'src/catalog/catalog.module';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Favorite.name, schema: FavoriteSchema }])],
+  imports: [CatalogModule, MongooseModule.forFeature([{ name: Favorite.name, schema: FavoriteSchema }])],
   controllers: [FavoriteController],
   providers: [FavoriteService, FavoriteRepository, FavoriteUseCase],
 })
