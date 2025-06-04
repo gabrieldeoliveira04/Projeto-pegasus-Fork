@@ -105,13 +105,13 @@ const Cart: React.FC = () => {
           
 
           {isLoading ? (
-            <p className="text-center text-lg text-gray-500 dark:text-gray-400 animate-pulse">
+            <p className="text-center text-lg text-slate-500 dark:text-slate-400 animate-pulse">
               Carregando seus itens...
             </p>
           ) : error ? (
             <p className="text-center text-red-600 font-semibold">{error}</p>
           ) : cartItems.length === 0 ? (
-            <p className="text-center text-xl mt-20 text-gray-600 dark:text-gray-400">
+            <p className="text-center text-xl mt-20 text-slate-600 dark:text-slate-400">
               Seu carrinho está vazio.
             </p>
           ) : (
@@ -126,47 +126,47 @@ const Cart: React.FC = () => {
         {/* Sidebar fixa à direita, ocupa 1/4 da tela, lista resumo + preço total + frete */}
         {cartItems.length > 0 && !isLoading && !error && (
           <aside
-            className="md:flex-[1] bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 flex flex-col sticky max-h-[calc(100vh-8rem)]"
+            className="md:flex-[1] bg-white dark:bg-slate-800 rounded-lg shadow-lg p-6 flex flex-col sticky max-h-[calc(100vh-8rem)]"
             aria-label="Resumo do pedido"
           >
             {/* Lista resumida dos produtos */}
-            <div className="flex-1 overflow-auto mb-6">
+            <div className="flex-1 overflow-auto">
               <h2 className="text-xl font-semibold mb-4 dark:text-slate-100">
                 Resumo do Pedido
               </h2>
-              <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+              <ul className="divide-y divide-slate-200 dark:divide-slate-700">
                 {cartItems.map(({ catalogData, quantity }) => (
                   <li
                     key={catalogData._id}
                     className="py-3 flex justify-between items-center dark:text-slate-200"
                   >
-                    <div className="flex flex-col max-w-[70%]">
+                    <div className="flex flex-col max-w-[70%] mb-4">
                       <span className="font-medium truncate" title={`${catalogData.marca} ${catalogData.modelo} ${catalogData.ano}`}>
                         {catalogData.marca} {catalogData.modelo} ({catalogData.ano})
                       </span>
-                      <small className="text-gray-500 dark:text-gray-400">
+                      <small className="text-slate-500 dark:text-slate-400">
                         Quantidade: {quantity}
                       </small>
                     </div>
-                    <div className="font-semibold text-green-600 dark:text-green-400">
+                    <small className="font-semibold text-green-600 dark:text-green-400">
                       {new Intl.NumberFormat("pt-BR", {
                         style: "currency",
                         currency: "BRL",
                       }).format(parsePreco(catalogData.preco) * quantity)}
-                    </div>
+                    </small>
                   </li>
                 ))}
               </ul>
             </div>
 
             {/* Frete */}
-            <div className="border-t border-gray-300 dark:border-gray-700 pt-4 mb-6 text-gray-700 dark:text-gray-300 flex justify-between">
+            <div className="border-t border-slate-300 dark:border-slate-700 pt-4 mb-6 text-slate-700 dark:text-slate-300 flex justify-between">
               <span>Frete:</span>
               <span>{calcularFrete()}</span>
             </div>
 
             {/* Total + botão */}
-            <div className="border-t border-gray-300 dark:border-gray-700 pt-4">
+            <div className="border-t border-slate-300 dark:border-slate-700 pt-4">
               <p className="text-xl font-semibold mb-2 dark:text-slate-100">
                 Total:
               </p>
