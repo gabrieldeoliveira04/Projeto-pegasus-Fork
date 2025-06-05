@@ -35,21 +35,33 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="fixed top-0 w-full h-full flex justify-end items-center">
-      <Image
-        src={Fundo_login}
-        alt="Fundo Login"
-        layout="fill"
-        objectFit="cover"
-        quality={100}
-        className="w-full h-full object-cover"
-      />
-      <div className="absolute top-0 m-4 flex items-center justify-center h-full w-full max-w-lg sm:max-w-md md:max-w-md lg:max-w-lg">
-        <div className="bg-transparent text-white p-6 border border-white rounded-lg backdrop-filter backdrop-blur-lg w-full">
-          <h2 className="text-2xl mb-4 text-center">Login</h2>
+    <div className="relative flex flex-col xl:flex-row w-full h-screen">
+      {/* IMAGEM DE FUNDO (MOBILE) */}
+      <div className="absolute inset-0 xl:hidden">
+        <Image
+          src={Fundo_login}
+          alt="Fundo Login"
+          fill
+          className="object-cover blur-sm"
+        />
+      </div>
+
+      {/* IMAGEM À ESQUERDA (DESKTOP) */}
+      <div className="hidden xl:block xl:w-1/2 h-full relative">
+        <Image
+          src={Fundo_login}
+          alt="Fundo Login"
+          fill
+          className="object-cover"
+        />
+      </div>
+
+      <div className="text-black relative z-10 w-full xl:text-white xl:flex-1 flex justify-center items-center p-6 xl:p-10 xl:bg-blue-900 bg-opacity-60 4k:h-auto">
+        <div className="bg-transparent p-6 border border-white rounded-lg backdrop-filter backdrop-blur-lg w-full 4k:text-4xl">
+          <h2 className="text-2xl mb-4 text-center 4k:text-5xl">Login</h2>
           <form onSubmit={handleLogin}>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium">
+              <label htmlFor="email" className="block text-sm">
                 Email
               </label>
               <input
@@ -57,12 +69,12 @@ export default function LoginPage() {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 p-2 w-full bg-transparent border border-white rounded text-white"
+                className="mt-1 p-2 w-full bg-transparent border border-white rounded text-white 4k:text-5xl"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="password" className="block text-sm font-medium">
+              <label htmlFor="password" className="block text-sm">
                 Senha
               </label>
               <input
@@ -70,11 +82,11 @@ export default function LoginPage() {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 p-2 w-full bg-transparent border border-white rounded text-white"
+                className="mt-1 p-2 w-full bg-transparent border border-white rounded text-white 4k:text-5xl"
                 required
               />
             </div>
-            <div className="text-center">
+            <div className="flex text-center justify-center items-center">
               <button
                 type="submit"
                 className="p-4 rounded bg-blue-500 hover:bg-blue-700 text-white"
