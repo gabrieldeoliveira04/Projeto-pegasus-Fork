@@ -7,6 +7,7 @@ import Fundo_login from "../../public/Fundo_login.jpeg";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ThemeButton } from "../../components/themeChange/themeButton";
 
 function Cadastro() {
   const [nome, setNome] = useState("");
@@ -84,10 +85,10 @@ function Cadastro() {
       </div>
 
       {/* FORMULÁRIO */}
-      <div className="text-black relative z-10 w-full xl:text-white xl:flex-1 flex justify-center items-center p-6 xl:p-10 xl:bg-blue-900 bg-opacity-60 4k:h-auto 4k:text-4xl">
+      <div className="text-black relative z-10 w-full xl:text-white xl:flex-1 flex justify-center items-center p-6 xl:p-10 xl:bg-blue-900 dark:xl:bg-black bg-opacity-60 4k:h-auto 4k:text-4xl">
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col w-full max-w-[900px] text-white"
+          className="flex flex-col w-full max-w-[900px]"
         >
           <h2 className="text-3xl font-bold text-center mb-6 4k:text-4xl">
             Faça seu cadastro

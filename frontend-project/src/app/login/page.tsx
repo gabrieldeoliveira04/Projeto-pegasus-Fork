@@ -56,7 +56,7 @@ export default function LoginPage() {
         />
       </div>
 
-      <div className="text-black relative z-10 w-full xl:text-white xl:flex-1 flex justify-center items-center p-6 xl:p-10 xl:bg-blue-900 bg-opacity-60 4k:h-auto">
+      <div className="text-black relative z-10 w-full xl:text-white xl:flex-1 flex justify-center items-center p-6 xl:p-10 xl:bg-blue-900 dark:xl:bg-black bg-opacity-60 4k:h-auto">
         <div className="bg-transparent p-6 border border-white rounded-lg backdrop-filter backdrop-blur-lg w-full 4k:text-4xl">
           <h2 className="text-2xl mb-4 text-center 4k:text-5xl">Login</h2>
           <form onSubmit={handleLogin}>

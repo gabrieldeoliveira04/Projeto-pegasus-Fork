@@ -76,12 +76,11 @@ export function Header({ user }: Props) {
                     <RiShoppingBagLine size={24} />
                     <span className="hidden sm:inline ml-2">Carrinho</span>
                   </Link>
-
-                  <div className="text-zinc-900 dark:text-white">
-                    <ThemeButton />
-                  </div>
                 </>
               )}
+              <div className="text-zinc-900 dark:text-white">
+                <ThemeButton />
+              </div>
 
               {isLoggedIn ? (
                 <button
