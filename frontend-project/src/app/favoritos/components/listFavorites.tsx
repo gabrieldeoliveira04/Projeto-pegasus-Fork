@@ -1,0 +1,87 @@
+import React from "react";
+import { FaRegHeart } from "react-icons/fa";
+import Image from "next/image";
+import { CarProps } from "@/utils/types/cars";
+import { useState } from "react";
+import { Container } from "@/components/container";
+
+interface ListFavoritesProps {
+  data: CarProps;
+}
+
+const ListFavorites: React.FC<ListFavoritesProps> = ({ data }) => {
+
+  const getDirectImageUrl = (driveUrl: string) => {
+    if (!driveUrl) return '';
+
+    const match = driveUrl.match(/\/d\/(.*?)\//);
+    if (match && match[1]) {
+      return `https://drive.google.com/uc?id=${match[1]}`;
+    }
+    return ''; 
+  };
+
+  const mainImageUrl = getDirectImageUrl(data.image);
+
+  const [selectedImage, setSelectedImage] = useState(mainImageUrl);
+
+  return (
+    <Container>
+      <section className="w-full border p-4 rounded-md bg-white dark:bg-zinc-900 dark:text-white shadow-lg flex flex-col sm:flex-row">
+        
+        {/* Seção de imagens */}
+        <div className="flex flex-col sm:w-full justify-center items-center sm:items-start sm:ml-6 sm:mr-6 mb-4 sm:mb-0">
+          <Image
+            src={selectedImage}
+            alt={`${data.marca} ${data.modelo}`}
+            width={400}
+            height={300}
+            className="rounded-md object-cover "
+            blurDataURL={selectedImage}
+          />
+        </div>
+
+        {/* Seção de detalhes */}
+        <div className="w-full flex flex-col">
+          <div className="mb-auto mt-4 sm:mt-0">
+            <h2 className="text-2xl font-bold mb-2">
+              {data.marca} {data.modelo}
+            </h2>
+            <p className="text-lg text-green-600 font-semibold mb-4">
+              Preço: {data.preco}
+            </p>
+            <div className="text-base text-gray-600 dark:text-slate-300 mb-8">
+              <p>Motorização: {data.motorizacao}</p>
+              <p>Transmissão: {data.transmissao}</p>
+              <p>Ano: {data.ano}</p>
+              <h3 className="mt-10">Descrição:</h3>
+              <p
+                style={{
+                  marginTop: "5px",
+                  marginBottom: "10px",
+                  fontStyle: "italic",
+                  lineHeight: "1.6",
+                  fontSize: "18px",
+                }}
+              >
+                {data.descricao}
+              </p>
+            </div>
+          </div>
+
+          {/* Botões */}
+          <div className="flex items-center mt-auto">
+            <button className="w-2/3 bg-sky-500 text-white font-bold py-2 px-4 rounded-md hover:bg-sky-600 m-1">
+              Adicionar ao carrinho
+            </button>
+            <button className="w-1/4 bg-sky-500 py-3 px-4 rounded-md hover:bg-sky-600 flex justify-center items-center">
+              <FaRegHeart size={16} color="white" />
+            </button>
+          </div>
+        </div>
+      </section>
+    </Container>
+  );
+};
+
+export default ListFavorites;
