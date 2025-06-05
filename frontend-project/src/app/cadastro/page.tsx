@@ -84,9 +84,12 @@ function Cadastro() {
       </div>
 
       {/* FORMULÁRIO */}
-      <div className="text-black relative z-10 w-full xl:text-white xl:flex-1 flex justify-center items-center p-6 xl:p-10 xl:bg-blue-900 bg-opacity-60 4k:w-full">
-        <form onSubmit={handleSubmit} className="flex flex-col w-full max-w-md">
-          <h2 className="text-3xl font-bold text-center mb-6">
+      <div className="text-black relative z-10 w-full xl:text-white xl:flex-1 flex justify-center items-center p-6 xl:p-10 xl:bg-blue-900 bg-opacity-60 4k:h-auto 4k:text-4xl">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col w-full max-w-[900px] text-white"
+        >
+          <h2 className="text-3xl font-bold text-center mb-6 4k:text-4xl">
             Faça seu cadastro
           </h2>
 
@@ -95,7 +98,7 @@ function Cadastro() {
             id="nome"
             name="nome"
             type="text"
-            className="mt-1 mb-3 bg-transparent border border-white text-white"
+            className="mt-1 mb-3 bg-transparent border border-white text-white 4k:p-8 4k:text-4xl"
             onChange={(e) => setNome(e.target.value)}
             required
           />
@@ -105,7 +108,7 @@ function Cadastro() {
             id="email"
             name="email"
             type="email"
-            className="mt-1 mb-3 bg-transparent border border-white text-white"
+            className="mt-1 mb-3 bg-transparent border border-white text-white 4k:p-8 4k:text-4xl"
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -115,7 +118,7 @@ function Cadastro() {
             id="CPF"
             name="CPF"
             type="text"
-            className="mt-1 mb-3 bg-transparent border border-white text-white"
+            className="mt-1 mb-3 bg-transparent border border-white text-white 4k:p-8 4k:text-4xl"
             onChange={(e) => setCPF(e.target.value)}
             required
           />
@@ -126,7 +129,7 @@ function Cadastro() {
               id="senha"
               name="senha"
               type={showPassword ? "text" : "password"}
-              className="w-full bg-transparent border border-white text-white pr-10"
+              className="w-full bg-transparent mb-5 border border-white text-white pr-10 4k:p-8 4k:text-4xl"
               onChange={(e) => setSenha(e.target.value)}
               required
             />
@@ -134,7 +137,7 @@ function Cadastro() {
               type="button"
               variant="ghost"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute inset-y-0 right-0 flex items-center pr-2"
+              className="absolute inset-y-0 right-0 flex items-center pr-2 4k:p-8 4k:pr-10 4k:text-4xl"
             >
               {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
             </Button>
@@ -142,7 +145,7 @@ function Cadastro() {
 
           <Button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white py-2"
+            className="bg-blue-500 hover:bg-blue-700 text-white py-2 4k:p-8 4k:text-4xl"
           >
             CADASTRAR
           </Button>
