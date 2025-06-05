@@ -10,7 +10,7 @@ export default function LoginPage() {
   const handleLogin = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3001/auth/login', {
+      const response = await fetch('http://127.0.0.1:3001/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
