@@ -84,11 +84,8 @@ function Cadastro() {
       </div>
 
       {/* FORMULÁRIO */}
-      <div className="relative z-10 w-full xl:flex-1 flex justify-center items-center p-6 xl:p-10 bg-blue bg-opacity-60">
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col w-full max-w-md text-white"
-        >
+      <div className="text-black relative z-10 w-full xl:text-white xl:flex-1 flex justify-center items-center p-6 xl:p-10 xl:bg-blue-900 bg-opacity-60 4k:w-full">
+        <form onSubmit={handleSubmit} className="flex flex-col w-full max-w-md">
           <h2 className="text-3xl font-bold text-center mb-6">
             Faça seu cadastro
           </h2>
