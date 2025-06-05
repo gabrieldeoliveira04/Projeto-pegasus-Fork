@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import Image from "next/image";
-import Fundo_login from "../../public/Fundo_login.png";
+import Fundo_login from "../../public/Fundo_login.jpeg";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -62,96 +62,94 @@ function Cadastro() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="relative flex justify-center items-center w-full h-auto">
-      <div className="absolute w-full lg-w-full inset-0">
+    <div className="relative flex flex-col md:flex-row w-full h-screen">
+      {/* IMAGEM DE FUNDO (MOBILE) */}
+      <div className="absolute inset-0 lg:hidden">
         <Image
           src={Fundo_login}
           alt="Fundo Login"
-          layout="fill"
-          objectFit="cover"
-          quality={100}
-          className="sm:blur xl:blur-none w-auto h-auto"
+          fill
+          className="object-cover blur-sm"
         />
       </div>
 
-      <div className="m-20 z-10 flex-col flex justify-center items-center p-6 md:p-10 w-full">
-        <div
-          className="text-white bg-black bg-opacity-60 rounded-lg p-5 h-full w-full max-w-sm
-          lg:ml-20
-          xl:"
+      {/* IMAGEM À ESQUERDA (DESKTOP) */}
+      <div className="hidden lg:block lg:w-1/2 h-full relative">
+        <Image
+          src={Fundo_login}
+          alt="Fundo Login"
+          fill
+          className="object-cover"
+        />
+      </div>
+
+      {/* FORMULÁRIO */}
+      <div className="relative z-10 w-full lg:w-1/2 flex justify-center items-center p-6 lg:p-10 bg-black bg-opacity-60">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col w-full max-w-md text-white"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-6">
+          <h2 className="text-3xl font-bold text-center mb-6">
             Faça seu cadastro
           </h2>
-          <form onSubmit={handleSubmit} className="flex flex-col">
-            <label htmlFor="nome" className="block text-sm font-medium">
-              Nome:
-            </label>
+
+          <label htmlFor="nome">Nome:</label>
+          <Input
+            id="nome"
+            name="nome"
+            type="text"
+            className="mt-1 mb-3 bg-transparent border border-white text-white"
+            onChange={(e) => setNome(e.target.value)}
+            required
+          />
+
+          <label htmlFor="email">E-mail:</label>
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            className="mt-1 mb-3 bg-transparent border border-white text-white"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <label htmlFor="CPF">CPF:</label>
+          <Input
+            id="CPF"
+            name="CPF"
+            type="text"
+            className="mt-1 mb-3 bg-transparent border border-white text-white"
+            onChange={(e) => setCPF(e.target.value)}
+            required
+          />
+
+          <label htmlFor="senha">Senha:</label>
+          <div className="relative mb-3">
             <Input
-              name="nome"
-              type="text"
-              id="nome"
-              className="mt-1 p-1 w-full bg-transparent border border-white rounded text-white"
-              onChange={(e) => setNome(e.target.value)}
+              id="senha"
+              name="senha"
+              type={showPassword ? "text" : "password"}
+              className="w-full bg-transparent border border-white text-white pr-10"
+              onChange={(e) => setSenha(e.target.value)}
               required
             />
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute inset-y-0 right-0 flex items-center pr-2"
+            >
+              {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+            </Button>
+          </div>
 
-            <label htmlFor="email" className="block text-sm font-medium">
-              E-mail:
-            </label>
-            <Input
-              name="email"
-              type="email"
-              id="email"
-              className="mt-1 p-2 w-full bg-transparent border border-white rounded text-white"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-
-            <label htmlFor="CPF" className="block text-sm font-medium">
-              CPF:
-            </label>
-            <Input
-              name="CPF"
-              type="text"
-              id="CPF"
-              className="mt-1 p-2 w-full bg-transparent border border-white rounded text-white"
-              onChange={(e) => setCPF(e.target.value)}
-              required
-            />
-
-            <label htmlFor="senha" className="block text-sm font-medium">
-              Senha:
-            </label>
-            <div className="relative w-full">
-              <Input
-                type={showPassword ? "text" : "password"}
-                id="senha"
-                name="senha"
-                className="mt-1 p-2 w-full bg-transparent border border-white rounded text-white pr-10"
-                onChange={(e) => setSenha(e.target.value)}
-                required
-              />
-              <Button
-                type="button"
-                variant="ghost"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 flex items-center p-1 m-1 w-fit bg-transparent"
-              >
-                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-              </Button>
-
-              <div className="flex justify-center">
-                <button
-                  type="submit"
-                  className="m-4 p-4 rounded bg-blue-500 hover:bg-blue-700 text-white"
-                >
-                  CADASTRAR
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
+          <Button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white py-2"
+          >
+            CADASTRAR
+          </Button>
+        </form>
       </div>
     </div>
   );
