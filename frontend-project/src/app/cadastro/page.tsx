@@ -62,9 +62,9 @@ function Cadastro() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="relative flex flex-col md:flex-row w-full h-screen">
+    <div className="relative flex flex-col xl:flex-row w-full h-screen">
       {/* IMAGEM DE FUNDO (MOBILE) */}
-      <div className="absolute inset-0 lg:hidden">
+      <div className="absolute inset-0 xl:hidden">
         <Image
           src={Fundo_login}
           alt="Fundo Login"
@@ -74,7 +74,7 @@ function Cadastro() {
       </div>
 
       {/* IMAGEM À ESQUERDA (DESKTOP) */}
-      <div className="hidden lg:block lg:w-1/2 h-full relative">
+      <div className="hidden xl:block xl:w-1/2 h-full relative">
         <Image
           src={Fundo_login}
           alt="Fundo Login"
@@ -84,7 +84,7 @@ function Cadastro() {
       </div>
 
       {/* FORMULÁRIO */}
-      <div className="relative z-10 w-full lg:w-1/2 flex justify-center items-center p-6 lg:p-10 bg-black bg-opacity-60">
+      <div className="relative z-10 w-full xl:flex-1 flex justify-center items-center p-6 xl:p-10 bg-blue bg-opacity-60">
         <form
           onSubmit={handleSubmit}
           className="flex flex-col w-full max-w-md text-white"
