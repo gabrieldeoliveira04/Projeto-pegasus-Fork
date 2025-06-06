@@ -96,7 +96,7 @@ export default function LoginPage() {
 
               <Link
                 href="/cadastro"
-                className="p-4 rounded bg-orange-500 hover:bg-orange-700 text-white"
+                className="p-4 rounded bg-blue-500 hover:bg-orange-700 text-white"
               >
                 Cadastrar
               </Link>
