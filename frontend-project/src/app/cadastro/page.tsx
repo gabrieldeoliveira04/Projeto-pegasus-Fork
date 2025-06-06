@@ -7,7 +7,6 @@ import Fundo_login from "../../public/Fundo_login.jpeg";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ThemeButton } from "../../components/themeChange/themeButton";
 
 function Cadastro() {
   const [nome, setNome] = useState("");
