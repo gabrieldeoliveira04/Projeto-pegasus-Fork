@@ -86,7 +86,7 @@ export default function LoginPage() {
                 required
               />
             </div>
-            <div className="flex text-center justify-center items-center m-4">
+            <div className="flex gap-x-5 text-center justify-center items-center">
               <button
                 type="submit"
                 className="p-4 rounded bg-blue-500 hover:bg-blue-700 text-white"
