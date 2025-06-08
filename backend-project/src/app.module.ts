@@ -5,10 +5,12 @@ import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 import { TransactionModule } from './transaction/transaction.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { CadastroModule } from './cadastro/cadastro.module';
 import { FavoriteModule } from './favorite/favorite.module';
 
 @Module({
   imports: [
+    CadastroModule,
     CatalogModule,
     ShoppingCartModule,
     TransactionModule,
