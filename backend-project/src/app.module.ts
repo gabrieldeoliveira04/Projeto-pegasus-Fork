@@ -6,6 +6,7 @@ import { TransactionModule } from './transaction/transaction.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { CadastroModule } from './cadastro/cadastro.module';
+import { FavoriteModule } from './favorite/favorite.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { CadastroModule } from './cadastro/cadastro.module';
     TransactionModule,
     UsersModule,
     AuthModule,
-    MongooseModule.forRoot('mongodb+srv://felipeca1268:felps1268@dbshop.scyb95h.mongodb.net/pegasus-shop?retryWrites=true&w=majority&appName=dbShop'),
+    FavoriteModule,
+    MongooseModule.forRoot('mongodb+srv://felipeca1268:felps1268@dbshop.scyb95h.mongodb.net/pegasus-shop?retryWrites=true&w=majority&appName=dbShop')
     // MongooseModule.forRoot('mongodb+srv://carlosgfkp:senha123@cluster0.eb17wf4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'), 
     //mongodb://localhost:27017/pegasus-shop
   ],

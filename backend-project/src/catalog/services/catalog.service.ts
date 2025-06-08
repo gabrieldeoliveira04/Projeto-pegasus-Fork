@@ -12,6 +12,21 @@ export class CatalogService {
     private readonly manageCatalogUseCase: ManageCatalogUseCase
   ) {}
 
+  async findById(productId: string): Promise<Catalog> {
+    try {
+      const product = await this.findCatalogUseCase.findOne(productId);
+      if (!product) {
+        throw new NotFoundException('Product not found');
+      }
+      return product;
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      throw new InternalServerErrorException('Failed to fetch product');
+    }
+  }
+
   async create(createCatalogDto: CreateCatalogDto): Promise<Catalog> {
     try {
       return await this.manageCatalogUseCase.create(createCatalogDto);

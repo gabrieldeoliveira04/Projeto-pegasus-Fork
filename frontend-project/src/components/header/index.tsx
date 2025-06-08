@@ -9,9 +9,10 @@ import { Input } from "@/components/input/index";
 import { Sidebar } from "@/components/sideBar/sideBar";
 import { ThemeButton } from "../themeChange/themeButton";
 import { usePathname } from "next/navigation";
+import { UserType } from "@/types/user";
 
 interface Props {
-  user: any; // Ajuste a tipagem conforme necessário
+  user?: UserType; // Tipagem do objeto de usuário, ajuste conforme necessário
 }
 
 export function Header({ user }: Props) {

@@ -7,10 +7,22 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // Configura o CORS para permitir solicitações apenas do front-end em localhost:3000
-  app.enableCors({
-    origin: 'http://localhost:3000',
-    credentials: true,
-  });
+  app.use(cors({
+    origin: (origin, callback) => {
+      const allowedOrigins = [
+        'http://localhost:3000',
+        'https://pegasus-shop-felipes-projects-0b62107b.vercel.app'
+      ];
+      
+      if (allowedOrigins.includes(origin) || !origin) {
+        // Permitir origens permitidas ou chamadas sem origem (como chamadas diretas)
+        callback(null, true);
+      } else {
+        callback(new Error('Origem não permitida'), false);
+      }
+    },
+    credentials: true, // Permitir que o navegador envie cookies
+  }));
 
   const options = new DocumentBuilder()
     .setTitle('Pegasus Shop')

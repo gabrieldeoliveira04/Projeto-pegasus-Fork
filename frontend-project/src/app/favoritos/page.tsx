@@ -1,59 +1,73 @@
-'use client'
+"use client";
 import { useEffect, useState } from "react";
-import { CarProps } from '@/utils/types/cars';
-import { Container } from "@/components/container";
-import CatalogItem from "../../components/carDetails/Details"; 
+import { CarProps } from "@/utils/types/cars";
+import ListFavorites from "./components/listFavorites";
+import { ContainerFavorite } from "./components/conteiner";
 
 export default function Home() {
   const [id, setId] = useState<string | undefined>(undefined);
-  const [carData, setCarData] = useState<CarProps | null>(null);
+  const [carData, setCarData] = useState<CarProps[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const pathArray = window.location.pathname.split('/');
-    const idFromPath = pathArray[pathArray.length - 1];
-    setId(idFromPath);
+    const token = localStorage.getItem("jwtToken");
 
-    if (idFromPath) {
-      fetch(`http://127.0.0.1:3001/catalog/${idFromPath}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Erro ao carregar os dados do carro');
-          }
-          return response.json();
-        })
-        .then(data => {
-          console.log('Dados recebidos:', data);
-          setCarData(data);
-          setIsLoading(false);
-        })
-        .catch(error => {
-          console.error('Erro ao buscar os dados do carro', error);
-          setError('Erro ao carregar os dados do carro. Tente novamente mais tarde.');
-          setIsLoading(false);
-        });
+    if (!token) {
+      setError("Usuário não autenticado.");
+      setIsLoading(false);
+      return;
     }
+
+    fetch(`http://localhost:3001/favorites`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erro ao carregar os dados dos favoritos");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Dados recebidos:", data);
+        setCarData(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar os dados dos favoritos", error);
+        setError(
+          "Erro ao carregar os dados dos favoritos. Tente novamente mais tarde."
+        );
+        setIsLoading(false);
+      });
   }, []);
 
   return (
     <main className="items-center">
-      <Container>
+      <ContainerFavorite>
         <section className="w-full mx-auto p-4">
-        <h1 className=" text-3xl font-bold">Pagína favoritos TESTE</h1>
+          <h1 className=" text-3xl p-2 font-bold">Favoritos</h1>
           {isLoading ? (
             <p className="text-white">Carregando dados...</p>
           ) : error ? (
             <p className="text-red-500">{error}</p>
           ) : (
-            carData && (
-              <div key={carData._id}>
-                <CatalogItem data={carData} />
-              </div>
+            carData.length > 0 ? (
+              carData.map(car => (
+                <div key={car._id} className="p-4">
+                  <ListFavorites data={car} />
+                </div>
+              ))
+            ) : (
+              <p className="text-white">Nenhum carro favorito encontrado.</p> 
             )
           )}
         </section>
-      </Container>
+      </ContainerFavorite>
     </main>
   );
 }
