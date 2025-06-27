@@ -1,4 +1,7 @@
 Escopo do Projeto: E-commerce para Loja de Carros
+
+Link de acesso: https://pegasus-shop-felipes-projects-0b62107b.vercel.app/
+
 1. Introdução
 
     Visão Geral do Projeto: Desenvolvimento de uma plataforma de e-commerce para uma loja de carros, utilizando tecnologias modernas e práticas de desenvolvimento de software.
