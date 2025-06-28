@@ -12,7 +12,8 @@ async function bootstrap() {
     origin: (origin, callback) => {
       const allowedOrigins = [
         'http://localhost:3000',
-        'https://projeto-pegasus-zeta.vercel.app'
+        'https://projeto-pegasus-zeta.vercel.app',
+        'pegasus-shop-felipes-projects-0b62107b.vercel.app'
       ];
       
       if (allowedOrigins.includes(origin) || !origin) {
