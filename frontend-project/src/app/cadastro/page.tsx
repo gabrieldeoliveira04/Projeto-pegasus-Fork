@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import Image from "next/image";
-import Fundo_login from "../../public/Fundo_login.jpeg";
+import Fundo_login from "../../../public/Fundo_login.jpeg";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

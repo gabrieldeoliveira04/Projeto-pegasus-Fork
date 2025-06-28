@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import Fundo_login from "../../public/Fundo_login.jpeg";
+import Fundo_login from "../../../public/Fundo_login.jpeg";
 import { useState } from "react";
 import Link from "next/link";
 
