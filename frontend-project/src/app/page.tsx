@@ -2,7 +2,7 @@
 import { Container } from "@/components/container";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import fundoImg from "@/public/fundo one.jpg";
+import fundoImg from "../../public/fundo one.jpg";
 import CarrosCard from "../components/productCard/carrosCard";
 import { CarProps } from "../utils/types/cars"
 
