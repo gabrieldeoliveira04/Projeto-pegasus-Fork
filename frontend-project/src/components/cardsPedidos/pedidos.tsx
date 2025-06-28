@@ -23,7 +23,7 @@ const ItemCarrinho: React.FC<ItemCarrinhoProps> = ({ item }) => {
       <div className="border p-2 rounded-lg bg-white shadow-md flex gap-6 items-center dark:bg-gray-800">
         {/* Imagem do carro */}
         <Image
-          src={`/carimages/${item.catalogData.marca}_${item.catalogData.modelo}.webp`}
+          src={`/carImages/${item.catalogData.marca}_${item.catalogData.modelo}.webp`}
           alt={`${item.catalogData.marca} ${item.catalogData.modelo}`}
           width={300}
           height={150}
