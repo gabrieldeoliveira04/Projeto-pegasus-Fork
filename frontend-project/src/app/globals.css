@@ -6,6 +6,7 @@
 body{
   background-color:gainsboro;
   color: #000;
+  overflow-x: hidden;
 }
 
 .dark body{

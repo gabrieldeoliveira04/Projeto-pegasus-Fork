@@ -1,7 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import * as cors from 'cors'; // Importe o pacote cors
+import cors from "cors"
+import { CadastroModule } from './cadastro/cadastro.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,7 +12,7 @@ async function bootstrap() {
     origin: (origin, callback) => {
       const allowedOrigins = [
         'http://localhost:3000',
-        'https://pegasus-shop-felipes-projects-0b62107b.vercel.app'
+        'https://projeto-pegasus-zeta.vercel.app'
       ];
       
       if (allowedOrigins.includes(origin) || !origin) {

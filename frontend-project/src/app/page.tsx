@@ -2,7 +2,7 @@
 import { Container } from "@/components/container";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import fundoImg from "../../public/fundo one.jpg";
+import fundoImg from "@/public/fundo one.jpg";
 import CarrosCard from "../components/productCard/carrosCard";
 import { CarProps } from "../utils/types/cars"
 
@@ -12,7 +12,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('https://ecommerce-repository.onrender.com/catalog')
+    fetch('https://projeto-pegasus-5a6q.onrender.com/catalog')
       .then(response => {
         if (!response.ok) {
           throw new Error('Erro ao carregar os dados do catálogo');

@@ -18,7 +18,7 @@ export default function Home() {
     if (idFromPath) {
       const fetchCarData = async () => {
         try {
-          const response = await fetch(`https://ecommerce-repository.onrender.com/catalog/${idFromPath}`, {
+          const response = await fetch(`https://projeto-pegasus-5a6q.onrender.com/catalog/${idFromPath}`, {
           });
 
           if (!response.ok) {

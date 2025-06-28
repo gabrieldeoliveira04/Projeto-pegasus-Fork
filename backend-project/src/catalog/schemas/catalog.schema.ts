@@ -6,9 +6,17 @@ export type CatalogDocument = Catalog & Document;
 
 @Schema()
 export class Catalog {
+  toObject() {
+    throw new Error('Method not implemented.');
+  }
   toJSON(): any {
     throw new Error('Method not implemented.');
   }
+  
+  @ApiProperty({ example: 'https://exemplo.com/imagem.jpg', nullable: true })
+  @Prop({ required: false })
+  image?: string;
+
   @ApiProperty({ example: 'Aston-Martin' })
   @Prop({ required: true })
   marca: string;
