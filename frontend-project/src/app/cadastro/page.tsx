@@ -30,7 +30,7 @@ function Cadastro() {
       // Validação dos dados antes do envio:
       await schema.validate(data);
 
-      const response = await fetch("http://localhost:3001/Cadastro", {
+      const response = await fetch("https://projeto-pegasus-5a6q.onrender.com/Cadastro", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -40,7 +40,7 @@ function Cadastro() {
     }
 
     try {
-      const response = await fetch("http://localhost:3001/Cadastro", {
+      const response = await fetch("https://projeto-pegasus-5a6q.onrender.com/Cadastro", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

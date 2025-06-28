@@ -32,7 +32,7 @@ const Cart: React.FC = () => {
         const token = localStorage.getItem("jwtToken");
         if (!token) throw new Error("Token JWT não encontrado.");
 
-        const response = await fetch("http://localhost:3001/shopping-cart", {
+        const response = await fetch("https://projeto-pegasus-5a6q.onrender.com/shopping-cart", {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
