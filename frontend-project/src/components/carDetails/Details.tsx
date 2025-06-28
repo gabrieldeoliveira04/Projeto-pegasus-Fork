@@ -11,13 +11,13 @@ interface CatalogItemProps {
 
 const CatalogItem: React.FC<CatalogItemProps> = ({ data }) => {
   const imageName = `${data.marca}_${data.modelo}`;
-  const mainImageUrl = `/carsImages/${imageName}.webp`;
+  const mainImageUrl = `/cars/${imageName}.webp`;
 
   const localImages = [
     mainImageUrl,
-    `/carsImages/${data.marca}_${data.modelo}_2.webp`,
-    `/carsImages/${data.marca}_${data.modelo}_3.webp`,
-    `/carsImages/${data.marca}_${data.modelo}_4.webp`,
+    `/cars/${data.marca}_${data.modelo}_2.webp`,
+    `/cars/${data.marca}_${data.modelo}_3.webp`,
+    `/cars/${data.marca}_${data.modelo}_4.webp`,
   ];
 
   const [selectedImage, setSelectedImage] = useState(mainImageUrl);

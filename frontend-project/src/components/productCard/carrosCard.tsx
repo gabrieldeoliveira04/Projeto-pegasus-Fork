@@ -11,7 +11,7 @@ interface CarrosCardProps {
 const CarrosCard: React.FC<CarrosCardProps> = ({ data }) => {
   const imageName = `${data.marca}_${data.modelo}`;
 
-  const imageUrl = `/carsImages/${imageName}.webp`;
+  const imageUrl = `/cars/${imageName}.webp`;
 
   return (
     <Link href={`/catalogo/${data._id}`}>
