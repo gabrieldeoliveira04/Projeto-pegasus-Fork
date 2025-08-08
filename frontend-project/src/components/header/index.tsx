@@ -10,6 +10,7 @@ import { Sidebar } from "@/components/sideBar/sideBar";
 import { ThemeButton } from "../themeChange/themeButton";
 import { usePathname } from "next/navigation";
 import { UserType } from "@/types/user";
+import { DropdownMenuCheckboxes } from "@/components/dropDownMenu/dropDownMenu";
 
 interface Props {
   user?: UserType;
@@ -60,7 +61,7 @@ export function Header({ user }: Props) {
                 <>
                   <Link
                     href="/favoritos"
-                    className="flex items-center hover:text-gray-400 dark:hover:text-sky-500 transition-colors"
+                    className="hidden md:block flex items-center hover:text-gray-400 dark:hover:text-sky-500 transition-colors"
                   >
                     <FaRegHeart size={20} />
                     <span className="hidden lg:inline ml-1 text-sm">Favoritos</span>
@@ -68,14 +69,17 @@ export function Header({ user }: Props) {
 
                   <Link
                     href="/carrinho-de-compra"
-                    className="flex items-center hover:text-gray-400 dark:hover:text-sky-500 transition-colors"
+                    className="hidden md:block flex items-center hover:text-gray-400 dark:hover:text-sky-500 transition-colors"
                   >
                     <RiShoppingBagLine size={22} />
                     <span className="hidden lg:inline ml-1 text-sm">Carrinho</span>
                   </Link>
 
-                  <div className="text-zinc-900 dark:text-white">
-                    <ThemeButton />
+                  <div className="md:hidden">
+                    <DropdownMenuCheckboxes  />
+                  </div>
+                  <div className="hidden md:block">
+                   <ThemeButton />
                   </div>
                 </>
               )}
