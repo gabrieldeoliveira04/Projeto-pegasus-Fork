@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import Fundo_login from "@/public/Fundo_login.jpeg";
+import Fundo_login from "../../../public/Fundo_login.jpeg";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ export default function LoginPage() {
   const handleLogin = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3001/auth/login", {
+      const response = await fetch("https://projeto-pegasus-5a6q.onrender.com/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import Image from "next/image";
-import Fundo_login from "../../public/Fundo_login.jpeg";
+import Fundo_login from "../../../public/Fundo_login.jpeg";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,7 +30,7 @@ function Cadastro() {
       // Validação dos dados antes do envio:
       await schema.validate(data);
 
-      const response = await fetch("http://localhost:3001/Cadastro", {
+      const response = await fetch("https://projeto-pegasus-5a6q.onrender.com/Cadastro", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -40,7 +40,7 @@ function Cadastro() {
     }
 
     try {
-      const response = await fetch("http://localhost:3001/Cadastro", {
+      const response = await fetch("https://projeto-pegasus-5a6q.onrender.com/Cadastro", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

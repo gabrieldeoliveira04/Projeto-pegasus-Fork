@@ -11,13 +11,13 @@ interface CarrosCardProps {
 const CarrosCard: React.FC<CarrosCardProps> = ({ data }) => {
   const imageName = `${data.marca}_${data.modelo}`;
 
-  const imageUrl = `/carImages/${imageName}.webp`;
+  const imageUrl = `/cars/${imageName}.webp`;
 
   return (
     <Link href={`/catalogo/${data._id}`}>
       <section className="border p-4 rounded-md bg-white shadow-md dark:bg-zinc-900 dark:text-white">
         {/* Renderiza a imagem */}
-        <Image src={imageUrl} alt={`${data.marca} ${data.modelo}`} width={300} height={200} className="rounded-md"/>
+        <Image src={imageUrl} alt={`${data.marca} ${data.modelo}`} width={300} height={200} className="rounded-md" unoptimized/>
         <h2 className=" text-base">{data.marca} {data.modelo}</h2>        
         <div className='flex items-center justify-between'>
             <p className='font-bold text-lg'>Preço: {data.preco}</p>

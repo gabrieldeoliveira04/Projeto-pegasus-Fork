@@ -18,8 +18,7 @@ export default function Home() {
       setIsLoading(false);
       return;
     }
-
-    fetch(`http://localhost:3001/favorites`, {
+    fetch(`https://projeto-pegasus-5a6q.onrender.com/favorites`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
