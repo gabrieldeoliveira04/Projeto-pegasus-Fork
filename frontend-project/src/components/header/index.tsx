@@ -61,7 +61,7 @@ export function Header({ user }: Props) {
                 <>
                   <Link
                     href="/favoritos"
-                    className="hidden md:block flex items-center hover:text-gray-400 dark:hover:text-sky-500 transition-colors"
+                    className="hidden xl:block flex items-center hover:text-gray-400 dark:hover:text-sky-500 transition-colors"
                   >
                     <FaRegHeart size={20} />
                     <span className="hidden lg:inline ml-1 text-sm">Favoritos</span>
@@ -69,16 +69,16 @@ export function Header({ user }: Props) {
 
                   <Link
                     href="/carrinho-de-compra"
-                    className="hidden md:block flex items-center hover:text-gray-400 dark:hover:text-sky-500 transition-colors"
+                    className="hidden xl:block flex items-center hover:text-gray-400 dark:hover:text-sky-500 transition-colors"
                   >
                     <RiShoppingBagLine size={22} />
                     <span className="hidden lg:inline ml-1 text-sm">Carrinho</span>
                   </Link>
 
-                  <div className="md:hidden">
+                  <div className="xl:hidden">
                     <DropdownMenuCheckboxes  />
                   </div>
-                  <div className="hidden md:block">
+                  <div className="hidden xl:block">
                    <ThemeButton />
                   </div>
                 </>
